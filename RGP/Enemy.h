@@ -35,6 +35,7 @@ namespace npc
 		~Enemy();
 		const std::string& getName();
 		const int& getHealth();
+		void healthCheck();
 		void attack();
 		void defence();
 	};
