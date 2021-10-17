@@ -1,26 +1,16 @@
 ﻿#include <iostream>
-#include "Player.h"
+#include "Manager.h"
 
 int main()
 {
-    Player test_player("The_sky_of_tears");
+	Manager test_manager;
 
-    test_player.defence({ "fire", 30 });
+	test_manager.startNewGame();
 
-    std::cout << "hp after fire 30 dmg " << test_player.getHealthPoints() << std::endl;
+	Player enemy_player;
 
-    test_player.defence({ "physic", 30 });
+	test_manager.startFight(&enemy_player);
 
-    std::cout << "hp after physic 30 dmg " << test_player.getHealthPoints() << std::endl;
 
-    test_player.defence({ "water", 50 });
 
-    if (test_player.isAlive())
-    {
-        std::cout << "alive\n";
-    }
-    else
-    {
-        std::cout << "dead\n";
-    }
 }

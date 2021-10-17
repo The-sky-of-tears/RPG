@@ -20,7 +20,7 @@ const int& npc::Enemy::getHealth() { return m_health; }
 
 void npc::Enemy::healthCheck()
 {
-	std::cout << "Health: " << getHealth << std::endl;
+	std::cout << "Health: " << getHealth() << std::endl;
 }
 
 void npc::Enemy::attack()
