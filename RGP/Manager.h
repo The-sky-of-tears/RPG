@@ -7,6 +7,7 @@ class Manager
 {
 private:
 
+
 public:
 
 };
