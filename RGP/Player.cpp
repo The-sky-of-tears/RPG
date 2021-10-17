@@ -37,7 +37,7 @@ std::pair<std::string, int> Player::attack()
 		"'2' - fire attack with basic damage\n" <<
 		"'3' - water attack with basic damage\n" <<
 		"'4' - earth attack with basic damage\n";
-	
+	return { "0", 0 };
 }
 
 void Player::defence(std::pair<std::string, int> hit)
