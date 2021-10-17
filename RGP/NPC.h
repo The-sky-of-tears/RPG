@@ -7,7 +7,7 @@ namespace npc
 {
 	struct InfNPC
 	{
-	private:
+	protected:
 		int m_amountOfNames = 5;
 		std::string m_name;
 		std::string* m_arrOfNames = new std::string[m_amountOfNames]{ "Shinji", "Wolfgang", "John", "Hector", "Nick" };

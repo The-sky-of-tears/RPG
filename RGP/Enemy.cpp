@@ -10,7 +10,7 @@ npc::Enemy::~Enemy()
 
 }
 
-const std::string& npc::Enemy::getName() { return }
+const std::string& npc::Enemy::getName() { return m_name; }
 
 const int& npc::Enemy::getHealth() { return m_health; }
 
