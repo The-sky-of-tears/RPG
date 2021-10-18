@@ -54,8 +54,8 @@ void Manager::continueGame()
 
 int Manager::startFight(npc::Enemy* current_enemy)
 {
-	
 	//test segment
+
 	current_player->showCurrentState();
 	std::cout << " VS ";
 	current_enemy->showCurrentState();

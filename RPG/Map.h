@@ -36,10 +36,5 @@ public:
 	npc::Enemy* getPlayerTileNPC();
 	void burryPlayerTileNPC();
 
-
-	int print_piece_of_map(std::pair<int, int> from, std::pair<int, int> to);
-	int print_whole_map();
-
-	int cmd_print_centered_map(int centering_rad);
 };
 

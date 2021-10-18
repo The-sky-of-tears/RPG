@@ -1,5 +1,6 @@
 #pragma once
 #include <utility>
+#include <iostream>
 
 namespace Helpers
 {
@@ -10,7 +11,7 @@ namespace Helpers
 		}
 		else if (int_to_norm < 0)
 		{
-			return   (-1) * int_to_norm % norm_max;
+			return  norm_max + int_to_norm % norm_max;
 		}
 		else
 		{
