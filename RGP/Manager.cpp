@@ -48,7 +48,7 @@ void Manager::startFight(npc::Enemy* current_enemy)
 		}
 		else
 		{
-			current_player->defence(current_player->attack());
+			current_player->defence(current_enemy->attack());
 			current_player->showCurrentState();
 			std::cout << std::endl;
 
