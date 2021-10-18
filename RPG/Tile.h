@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Player.h"
 #include "Chest.h"
+#include "Enemy.h"
+#include "NPC.h"
 
 enum class Tile_Types {
 	Ground,
@@ -18,7 +20,7 @@ private:
 	bool is_player_here;
 	
 	bool is_npc_here;
-	Player* npc;
+	npc::Enemy* npc;
 
 	bool is_chest_here;
 	Chest* chest;
@@ -31,15 +33,15 @@ public:
 	void setPlayer();
 	void unsetPlayer();
 
-	void setNPC(Player* npc_to_set);
-	Player* unsetNPC();
+	void setNPC(npc::Enemy* npc_to_set);
+	npc::Enemy* unsetNPC();
 
 	Tile_Types getType();
 	bool checkForPlayer();
 	bool checkForNPC();
 	bool checkForChest();
 
-	Player* returnNPC();
+	npc::Enemy* returnNPC();
 
 	void print_type();
 

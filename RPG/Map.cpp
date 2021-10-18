@@ -34,7 +34,7 @@ std::pair<int, int> Map::getSize()
 }
 
 
-void Map::setNPC(Player* NPC, std::pair<int, int> npc_coords)
+void Map::setNPC(npc::Enemy* NPC, std::pair<int, int> npc_coords)
 {
 	map[npc_coords.first][npc_coords.second].setNPC(NPC);
 }
@@ -107,7 +107,7 @@ bool Map::checkTileForChest(std::pair<int, int> tile_to_check)
 	return map[tile_to_check.first][tile_to_check.second].checkForChest();
 }
 
-Player* Map::getPlayerTileNPC()
+npc::Enemy* Map::getPlayerTileNPC()
 {
 	return map[player_pos.first][player_pos.second].returnNPC();
 }

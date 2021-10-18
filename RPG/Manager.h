@@ -1,7 +1,9 @@
 #pragma once
-//#include "Player.h"
-#include "NPC.h"
+
+#include "Player.h"
 #include "Map.h"
+#include "Enemy.h"
+#include "NPC.h"
 
 //#include "Menu.h"
 
@@ -17,13 +19,13 @@ public:
 
 	void startNewGame();
 
-	void putNPC(Player* sheety_monster); //TEMPORARY SOLUTION
+	void putNPC(npc::Enemy* sheety_monster); //TEMPORARY SOLUTION
 
 	void GameLoop();
 
 	void continueGame();
 
-	int startFight(Player* current_enemy);
+	int startFight(npc::Enemy* current_enemy);
 
 	void startTrade();
 

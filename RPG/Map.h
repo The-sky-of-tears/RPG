@@ -22,7 +22,7 @@ public:
 
 	std::pair<int, int> getSize();
 
-	void setNPC(Player* NPC, std::pair<int, int> npc_coords);
+	void setNPC(npc::Enemy* NPC, std::pair<int, int> npc_coords);
 	void unsetNPC(std::pair<int, int> npc_coords);
 
 	std::pair<int, int> getPlayerPos();
@@ -33,7 +33,7 @@ public:
 	bool checkTileForNPC(std::pair<int, int> tile_to_check);
 	bool checkTileForChest(std::pair<int, int> tile_to_check);
 
-	Player* getPlayerTileNPC();
+	npc::Enemy* getPlayerTileNPC();
 	void burryPlayerTileNPC();
 
 

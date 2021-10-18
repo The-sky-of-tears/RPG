@@ -14,7 +14,9 @@ int main()
 
 	npc::Enemy enemy_player;
 
-	test_manager.startFight(&enemy_player);
+	test_manager.putNPC(&enemy_player);
+
+	test_manager.GameLoop();
 	
 	return 0;
 }

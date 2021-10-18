@@ -16,7 +16,7 @@ void Manager::startNewGame()
 	current_map = new Map;
 }
 
-void Manager::putNPC(Player* sheety_monster)
+void Manager::putNPC(npc::Enemy* sheety_monster)
 {
 	current_map->setNPC(sheety_monster, { 4,4 });
 }
@@ -52,11 +52,10 @@ void Manager::continueGame()
 
 }
 
-int Manager::startFight(Player* current_enemy)
+int Manager::startFight(npc::Enemy* current_enemy)
 {
-	/*
-	test segment
-	*/
+	
+	//test segment
 	current_player->showCurrentState();
 	std::cout << " VS ";
 	current_enemy->showCurrentState();
