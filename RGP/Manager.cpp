@@ -21,9 +21,8 @@ void Manager::continueGame()
 
 void Manager::startFight(Player* current_enemy)
 {
-	/*
-	test segment
-	*/
+	
+	//test segment
 	current_player->showCurrentState();
 	std::cout << " VS ";
 	current_enemy->showCurrentState();
