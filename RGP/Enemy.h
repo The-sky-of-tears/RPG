@@ -1,5 +1,6 @@
 #pragma once
 #include "NPC.h"
+#include "Item.h"
 
 namespace npc
 {
@@ -7,36 +8,22 @@ namespace npc
 	{
 	private:
 		int m_mana = 0;
-		int m_attack = 25;
+		int m_attack = 30;
+		int m_crit_damage_chance = 10;
 
-		int m_amountLoot = 2, m_amountOfTypes = 3, m_amountBuffs = 3, m_amountResist = 4;
-		int* m_loot = new int[m_amountLoot];
-		std::pair<std::string, bool>* m_typeOfEnemy = new std::pair<std::string, bool>[m_amountOfTypes]
-		{
-			{ "Warrior", 0 },
-			{ "Archer", 0 },
-			{ "Magician", 0 }
-		};
-		std::pair<std::string, int>* m_resist = new std::pair<std::string, int>[m_amountResist]
-		{
-			{ "Air", 1 },
-			{ "Earth", 1 },
-			{ "Fire", 1 },
-			{ "Water", 1 }
-		};
-		std::pair<std::string, int>* m_buffs = new std::pair<std::string, int>[m_amountResist]
-		{
-			{ "+Health", 0 },
-			{ "+Mana", 0 },
-			{ "+Attack", 0 }
-		};
+		int m_amountOfTypes = 3, m_amountBuffs = 3, m_amountResist = 4, m_amountSpells = 4;
+		std::pair<std::string, int>* m_attacks = new std::pair<std::string, int>[m_amountSpells];
+		std::pair<std::string, bool>* m_typeOfEnemy = new std::pair<std::string, bool>[m_amountOfTypes];
+		std::pair<std::string, double>* m_resist = new std::pair<std::string, double>[m_amountResist];
 	public:
 		Enemy();
 		~Enemy();
 		const std::string& getName();
 		const int& getHealth();
 		void healthCheck();
-		void attack();
-		void defence();
+		const std::pair<std::string, int>& attack();
+		void defence(std::pair<std::string, int> hit);
+		void showCurrentState();
+		bool isAlive();
 	};
 }

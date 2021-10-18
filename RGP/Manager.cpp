@@ -19,7 +19,7 @@ void Manager::continueGame()
 
 }
 
-void Manager::startFight(Player* current_enemy)
+void Manager::startFight(npc::Enemy* current_enemy)
 {
 	
 	//test segment

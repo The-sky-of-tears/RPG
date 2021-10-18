@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "NPC.h"
+#include "Enemy.h"
 #include "Map.h"
 //#include "Menu.h"
 
@@ -17,7 +18,7 @@ public:
 
 	void continueGame();
 
-	void startFight(Player* current_enemy);
+	void startFight(npc::Enemy* current_enemy);
 
 	void startTrade();
 
