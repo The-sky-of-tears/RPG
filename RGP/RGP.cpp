@@ -7,6 +7,7 @@
 
 int main()
 {
+	srand(static_cast<unsigned int>(time(NULL)));
 	//Manager test_manager;
 
 	//test_manager.startNewGame();

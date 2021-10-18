@@ -3,7 +3,6 @@
 
 npc::Enemy::Enemy()
 {
-	srand(static_cast<unsigned int>(time(NULL)));
 	m_typeOfEnemy[0] = { "Warrior", 0 };
 	m_typeOfEnemy[1] = { "Archer", 0 };
 	m_typeOfEnemy[2] = { "Magician", 0 };
@@ -69,7 +68,6 @@ void npc::Enemy::healthCheck()
 
 const std::pair<std::string, int>& npc::Enemy::attack()
 {
-	srand(static_cast<unsigned int>(time(NULL)));
 	int typeOfAttack = rand() % 5;
 
 	if (rand() % 101 < m_crit_damage_chance)
