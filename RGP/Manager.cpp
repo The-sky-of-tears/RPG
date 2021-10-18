@@ -1,4 +1,6 @@
+#pragma once
 #include "Manager.h"
+#include "DisplayMap.h"
 
 void Manager::startNewGame()
 {
@@ -14,12 +16,43 @@ void Manager::startNewGame()
 	current_map = new Map;
 }
 
+void Manager::putNPC(Player* sheety_monster)
+{
+	current_map->setNPC(sheety_monster, { 4,4 });
+}
+
+void Manager::GameLoop()
+{
+	char choice;
+	int fight_result;
+	while (1) 
+	{
+		DisplayMap::centerdedToCMD(3, current_map);
+		std::cout << "Where you want to go: (f)orward, (b)ackward, (l)eft, (r)igt? ";
+		std::cin >> choice;
+		std::cout << std::endl;
+		current_map->moovePlayer(choice);
+		if (current_map->checkTileForNPC(current_map->getPlayerPos()))
+		{
+			fight_result = startFight(current_map->getPlayerTileNPC());
+			if (fight_result == 0) {
+				current_map->burryPlayerTileNPC();
+			}
+			else
+			{
+				break;
+			}
+		}
+
+	}
+}
+
 void Manager::continueGame()
 {
 
 }
 
-void Manager::startFight(Player* current_enemy)
+int Manager::startFight(Player* current_enemy)
 {
 	/*
 	test segment
@@ -44,7 +77,7 @@ void Manager::startFight(Player* current_enemy)
 			if (!current_enemy->isAlive())
 			{
 				std::cout << "Easy win! GG WP! \n";
-				break;
+				return 0;
 			}
 		}
 		else
@@ -58,7 +91,7 @@ void Manager::startFight(Player* current_enemy)
 			if (!current_player->isAlive())
 			{
 				std::cout << "Noob, delete the game! ^_^ \n";
-				break;
+				return 1;
 			}
 		}
 	}

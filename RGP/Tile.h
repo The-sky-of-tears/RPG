@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include "Player.h"
+#include "Chest.h"
 
 enum class Tile_Types {
 	Ground,
@@ -13,23 +15,31 @@ class Tile
 private:
 	Tile_Types type;
 
-
 	bool is_player_here;
-	bool is_NPC_here;
+	
+	bool is_npc_here;
+	Player* npc;
+
 	bool is_chest_here;
-	bool other_boolean_shit;
+	Chest* chest;
 
 public:
 	Tile();
 
 	void setTileType(Tile_Types type_to_set);
-	void setPlayerHere();
+
+	void setPlayer();
+	void unsetPlayer();
+
+	void setNPC(Player* npc_to_set);
+	Player* unsetNPC();
 
 	Tile_Types getType();
 	bool checkForPlayer();
 	bool checkForNPC();
 	bool checkForChest();
-	bool checkForShit();
+
+	Player* returnNPC();
 
 	void print_type();
 

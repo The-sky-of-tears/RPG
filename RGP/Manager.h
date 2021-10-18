@@ -1,8 +1,10 @@
 #pragma once
-#include "Player.h"
+//#include "Player.h"
 #include "NPC.h"
 #include "Map.h"
+
 //#include "Menu.h"
+
 
 class Manager
 {
@@ -15,9 +17,13 @@ public:
 
 	void startNewGame();
 
+	void putNPC(Player* sheety_monster); //TEMPORARY SOLUTION
+
+	void GameLoop();
+
 	void continueGame();
 
-	void startFight(Player* current_enemy);
+	int startFight(Player* current_enemy);
 
 	void startTrade();
 

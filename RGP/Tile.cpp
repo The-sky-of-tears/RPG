@@ -1,12 +1,16 @@
+#pragma once
 #include "Tile.h"
 
 
 Tile::Tile()
 {
 	is_player_here = false;
-	is_NPC_here = false;
+
+	is_npc_here = false;
+	npc = NULL;
+	
 	is_chest_here = false;
-	other_boolean_shit = false;
+	chest = NULL;
 
 	type = Tile_Types::Sand;
 }
@@ -16,9 +20,26 @@ void Tile::setTileType(Tile_Types type_to_set)
 	type = type_to_set;
 }
 
-void Tile::setPlayerHere()
+void Tile::setPlayer()
 {
 	is_player_here = true;
+}
+
+void Tile::unsetPlayer()
+{
+	is_player_here = false;
+}
+
+void Tile::setNPC(Player* npc_to_set)
+{
+	is_npc_here = true;
+	npc = npc_to_set;
+}
+
+Player* Tile::unsetNPC()
+{
+	is_npc_here = false;
+	return npc;
 }
 
 Tile_Types Tile::getType()
@@ -33,7 +54,7 @@ bool Tile::checkForPlayer()
 
 bool Tile::checkForNPC()
 {
-	return is_NPC_here;
+	return is_npc_here;
 }
 
 bool Tile::checkForChest()
@@ -41,9 +62,9 @@ bool Tile::checkForChest()
 	return is_chest_here;
 }
 
-bool Tile::checkForShit()
+Player* Tile::returnNPC()
 {
-	return other_boolean_shit;
+		return npc;
 }
 
 void Tile::print_type()
