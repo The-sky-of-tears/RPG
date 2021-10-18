@@ -23,5 +23,7 @@ namespace npc
 		void healthCheck();
 		const std::pair<std::string, int>& attack();
 		void defence(std::pair<std::string, int> hit);
+		void showCurrentState();
+		bool isAlive();
 	};
 }

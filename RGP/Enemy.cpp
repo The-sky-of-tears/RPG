@@ -110,3 +110,13 @@ void npc::Enemy::defence(std::pair<std::string, int> hit)
 
 	m_health -= hit.second;
 }
+
+void npc::Enemy::showCurrentState()
+{
+	std::cout << getName() << ", " << getHealth();
+}
+
+bool npc::Enemy::isAlive()
+{
+	return m_health <= 0 ? 0 : 1;
+}
