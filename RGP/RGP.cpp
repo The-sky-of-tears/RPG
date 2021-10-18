@@ -7,13 +7,18 @@
 
 int main()
 {
-	Manager test_manager;
+	//Manager test_manager;
 
-	test_manager.startNewGame();
+	//test_manager.startNewGame();
 
-	Player enemy_player;
+	//Player enemy_player;
 
-	test_manager.startFight(&enemy_player);
+	//test_manager.startFight(&enemy_player);
+
+	npc::Enemy test_enemy;
+	test_enemy.healthCheck();
+	test_enemy.defence({ "water", 50 });
+	test_enemy.healthCheck();
 	
 	return 0;
 }
