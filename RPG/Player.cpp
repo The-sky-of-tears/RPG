@@ -100,5 +100,3 @@ void Player::showCurrentState()
 	std::cout << Player::getName() << ", " <<
 		Player::getHealthPoints();
 }
-
-

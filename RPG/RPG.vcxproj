@@ -24,6 +24,7 @@
     <ProjectGuid>{a5817400-30c5-418e-820b-e0c75a36e75f}</ProjectGuid>
     <RootNamespace>RGP</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>RPG</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -146,7 +147,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="NotEnemy.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RGP.cpp" />
+    <ClCompile Include="RPG.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
