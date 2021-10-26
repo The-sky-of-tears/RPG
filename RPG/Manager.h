@@ -25,7 +25,7 @@ public:
 
 	void continueGame();
 
-	int startFight(npc::Enemy* current_enemy);
+	int startFight(npc::Enemy* current_enemy); //0 player win, 1 - player loose
 
 	void startTrade();
 

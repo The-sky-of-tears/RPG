@@ -52,7 +52,7 @@ void Manager::continueGame()
 
 }
 
-int Manager::startFight(npc::Enemy* current_enemy)
+int Manager::startFight(npc::Enemy* current_enemy) //0 player win, 1 - player loose
 {
 	//test segment
 
