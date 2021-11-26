@@ -11,7 +11,7 @@
 #include "Manager.h"
 #include "Item.h"
 
-int mainn()
+int main()
 {
 	srand(static_cast<unsigned int>(time(NULL)));
 	Manager test_manager;
@@ -31,7 +31,7 @@ int mainn()
 
 using json = nlohmann::json;
 
-int main()
+int maine()
 {
     std::string items_json = "Data//Items.json";
     // parse and serialize JSON
@@ -43,6 +43,11 @@ int main()
 	Item new_item(&opened, 5, "Wooden stick");
 
 	std::cout << new_item.getWeight() << std::endl;
+	return 0;
 
+}
 
+int mainn() {
+	Speclist new_speclist;
+	std::cout << new_speclist.get(Spec_Types::Agility) << std::endl;
 }

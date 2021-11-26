@@ -49,8 +49,19 @@ enum class Spec_Types {
 
 	END
 };
-struct Speclist
+class Speclist
 {
+public:
 	double specs[static_cast<int>(Spec_Types::END)];
+
+	Speclist() {
+		for (int x = 0; x < static_cast<int>(Spec_Types::END); x++) {
+			specs[x] = 0;
+		}
+	}
+
+	double get(Spec_Types spec) {
+		return specs[static_cast<int>(spec)];
+	}
 };
 
