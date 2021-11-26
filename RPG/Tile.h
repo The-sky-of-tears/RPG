@@ -43,6 +43,4 @@ public:
 
 	npc::Enemy* returnNPC();
 
-	void print_type();
-
 };

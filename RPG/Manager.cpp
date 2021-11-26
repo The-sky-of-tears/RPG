@@ -25,25 +25,34 @@ void Manager::GameLoop()
 {
 	char choice;
 	int fight_result;
-	while (1) 
+	while (1)
 	{
 		DisplayMap::centerdedToCMD(3, current_map);
 		std::cout << "Where you want to go: (f)orward, (b)ackward, (l)eft, (r)igt? ";
 		std::cin >> choice;
 		std::cout << std::endl;
-		current_map->moovePlayer(choice);
-		if (current_map->checkTileForNPC(current_map->getPlayerPos()))
+		if (std::cin.fail())
 		{
-			fight_result = startFight(current_map->getPlayerTileNPC());
-			if (fight_result == 0) {
-				current_map->burryPlayerTileNPC();
-			}
-			else
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			std::cout << "Oops, that input is invalid.  Please try again.\n";
+		}
+		else
+		{
+			std::cin.ignore(32767, '\n');
+			current_map->moovePlayer(choice);
+			if (current_map->checkTileForNPC(current_map->getPlayerPos()))
 			{
-				break;
+				fight_result = startFight(current_map->getPlayerTileNPC());
+				if (fight_result == 0) {
+					current_map->burryPlayerTileNPC();
+				}
+				else
+				{
+					break;
+				}
 			}
 		}
-
 	}
 }
 

@@ -1,6 +1,5 @@
 #include "Map.h"
-#include <fstream>
-#include "Helpers.h"
+
 
 Map::Map()
 {
@@ -72,7 +71,7 @@ std::pair<int, int> Map::getPlayerPos()
 void Map::moovePlayer(char dir) // (f)orward, (b)ackward, (l)eft, (r)igt
 {
 	std::pair<int, int> new_coords = player_pos;
-	switch (dir) 
+	switch (dir)
 	{
 	case 'f':
 		new_coords.first--;
@@ -91,7 +90,7 @@ void Map::moovePlayer(char dir) // (f)orward, (b)ackward, (l)eft, (r)igt
 	}
 
 	map[player_pos.first][player_pos.second].unsetPlayer();
-	Map::setPlayer(new_coords);
+	setPlayer(new_coords);
 }
 
 Tile_Types Map::checkTileForType(std::pair<int, int> tile_to_check)

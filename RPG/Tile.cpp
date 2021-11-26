@@ -66,8 +66,3 @@ npc::Enemy* Tile::returnNPC()
 {
 		return npc;
 }
-
-void Tile::print_type()
-{
-	std::cout << static_cast<int>(type);
-}

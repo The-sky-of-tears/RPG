@@ -1,0 +1,68 @@
+{
+	"0":[],
+	"1":[], 
+	"2":[], 
+	"3":[], 
+	"4":[], 
+	"5":{ 
+		"Wooden stick":{
+			"description":"Just a simple stick", 
+			"level": 0,
+			"weight": 2,
+			"price": 1,
+			"durability": 2,
+			"max_durability": 2,
+			"spec_change":[
+				{
+					"z": 16,
+					"a": 0,
+					"x": 0,
+					"b": 0,
+					"y": 0,
+					"c": 1,
+					"z_min": 1,
+					"z_max": 2
+				},
+				{
+					"z": 21,
+					"a": 0.5,
+					"x": 0,
+					"b": 0,
+					"y": 0,
+					"c": 1,
+					"z_min": 1,
+					"z_max": 2
+				}
+			],
+			"durability_coef":[
+				{
+					"z": 21,
+					"a": -0.5,
+					"x": 0,
+					"b": 0,
+					"y": 0,
+					"c": -1,
+					"z_min": 1,
+					"z_max": 2
+				},
+				{
+					"z": 20,
+					"a": -0.5,
+					"x": 0,
+					"b": 0,
+					"y": 0,
+					"c": -1,
+					"z_min": 1,
+					"z_max": 5
+				}
+			],
+			"transforms_when": 1,
+			"transforms_to":{
+				"type": "5",
+				"name": "Sharpened_stick"
+			}
+		}
+	},
+	"6":[],
+	"7":[]
+}
