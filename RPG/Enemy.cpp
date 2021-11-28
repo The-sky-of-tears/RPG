@@ -48,7 +48,7 @@ void npc::Enemy::defence(Speclist& specsPlayer)
 
 void npc::Enemy::showCurrentState()
 {
-	std::cout << getType() << " " << getName() << ", " << getHealth();
+	std::cout << getType() << " " << getName() << ", " << getHealth() << std::endl;
 }
 
 bool npc::Enemy::isAlive()
@@ -174,33 +174,32 @@ std::shared_ptr<npc::Enemy> npc::Director::getEnemy()
 	return builder->getEnemy();
 }
 
-std::shared_ptr<npc::Enemy> npc::createEnemy(Director& director/*, int amount*/)
+void/*std::shared_ptr<npc::Enemy>*/ npc::createEnemy(Director& director, int amount, std::vector<std::shared_ptr<Enemy>>& enemyList)
 {
-	std::shared_ptr<Enemy> enemy;
-	//for (int i = 0; i < amount; i++)
-	//{
-	int typeOfEnemy = rand() % 3;
-	if (typeOfEnemy == 0)
+	//std::shared_ptr<Enemy> enemy;
+	for (int i = 0; i < amount; i++)
 	{
-		BuildWarrior warriorBuilder;
-		director.setBuilder(&warriorBuilder);
-		director.build(/*item_db*/);
-		enemy = director.getEnemy();
+		int typeOfEnemy = rand() % 3;
+		if (typeOfEnemy == 0)
+		{
+			BuildWarrior warriorBuilder;
+			director.setBuilder(&warriorBuilder);
+			director.build(/*item_db*/);
+			enemyList.at(i) = director.getEnemy();
+		}
+		else if (typeOfEnemy == 1)
+		{
+			BuildArcher archerBuilder;
+			director.setBuilder(&archerBuilder);
+			director.build(/*item_db*/);
+			enemyList.at(i) = director.getEnemy();
+		}
+		else if (typeOfEnemy)
+		{
+			BuildMagician magicianBuilder;
+			director.setBuilder(&magicianBuilder);
+			director.build(/*item_db*/);
+			enemyList.at(i) = director.getEnemy();
+		}
 	}
-	else if (typeOfEnemy == 1)
-	{
-		BuildArcher archerBuilder;
-		director.setBuilder(&archerBuilder);
-		director.build(/*item_db*/);
-		enemy = director.getEnemy();
-	}
-	else if (typeOfEnemy)
-	{
-		BuildMagician magicianBuilder;
-		director.setBuilder(&magicianBuilder);
-		director.build(/*item_db*/);
-		enemy = director.getEnemy();
-	}
-	//}
-	return enemy;
 }

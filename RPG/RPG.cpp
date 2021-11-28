@@ -24,9 +24,14 @@ int main()
 
 	test_manager.GameLoop();
 	*/
+	int amount = 5;
+	std::vector<std::shared_ptr<npc::Enemy>> enemyList(amount);
 	npc::Director director;
-	std::shared_ptr<npc::Enemy> enemy = npc::createEnemy(director);
-	enemy->showCurrentState();
+	npc::createEnemy(director, amount, enemyList);
+	for (int i = 0; i < enemyList.size(); i++)
+	{
+		enemyList.at(i)->showCurrentState();
+	}
 	return 0;
 }
 

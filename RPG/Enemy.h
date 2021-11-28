@@ -90,5 +90,5 @@ namespace npc
 		void build();
 	};
 
-	std::shared_ptr<npc::Enemy> createEnemy(Director& director/*, int amount*/);
+	void/*std::shared_ptr<npc::Enemy>*/ createEnemy(Director& director, int amount, std::vector<std::shared_ptr<Enemy>>& enemyList);
 }
