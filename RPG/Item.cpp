@@ -125,3 +125,14 @@ Speclist Item::useItem(Speclist Player_Specs)
 	return Player_Specs;
 }
 
+Item_Search_Plate::Item_Search_Plate()
+{
+	type = "5";
+	name = "Wooden stick";
+}
+
+Item_Search_Plate::Item_Search_Plate(std::string new_type, std::string new_name)
+{
+	type = new_type;
+	name = new_name;
+}

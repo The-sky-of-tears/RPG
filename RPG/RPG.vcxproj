@@ -168,7 +168,6 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="Data\Items.json" />
-    <None Include="Data\Player_defaults.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

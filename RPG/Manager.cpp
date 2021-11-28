@@ -13,12 +13,7 @@ void Manager::startNewGame()
 
 	current_player = new Player(new_name);
 
-	current_map = new Map;
-}
-
-void Manager::putNPC(npc::Enemy* sheety_monster)
-{
-	current_map->setNPC(sheety_monster, { 4,4 });
+	current_map = new Map();
 }
 
 void Manager::GameLoop()
@@ -45,7 +40,8 @@ void Manager::GameLoop()
 			{
 				fight_result = startFight(current_map->getPlayerTileNPC());
 				if (fight_result == 0) {
-					current_map->burryPlayerTileNPC();
+					Chest enemy_loot(current_map->getPlayerTileNPC()->inherit_item(), current_map->getPlayerTileNPC()->get_level()*5, current_map->getPlayerTileNPC()->get_level() * 10);
+					current_map->burryPlayerTileNPC(enemy_loot);
 				}
 				else
 				{
@@ -61,7 +57,7 @@ void Manager::continueGame()
 
 }
 
-int Manager::startFight(npc::Enemy* current_enemy) //0 player win, 1 - player loose
+int Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player win, 1 - player loose
 {
 	//test segment
 

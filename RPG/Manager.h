@@ -19,13 +19,11 @@ public:
 
 	void startNewGame();
 
-	void putNPC(npc::Enemy* sheety_monster); //TEMPORARY SOLUTION
-
 	void GameLoop();
 
 	void continueGame();
 
-	int startFight(npc::Enemy* current_enemy); //0 player win, 1 - player loose
+	int startFight(std::shared_ptr<npc::Enemy> current_enemy); //0 player win, 1 - player loose
 
 	void startTrade();
 

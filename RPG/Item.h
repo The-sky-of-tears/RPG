@@ -41,6 +41,10 @@ struct ChangeList  // z = a*x + b*y + c
 struct Item_Search_Plate {
 	std::string type;
 	std::string name;
+
+	Item_Search_Plate();
+	Item_Search_Plate(std::string new_type, std::string new_name);
+
 };
 
 class Item

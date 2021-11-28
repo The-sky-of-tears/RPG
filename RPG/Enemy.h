@@ -15,11 +15,13 @@ namespace npc
 		std::string m_type;
 		Speclist specsEnemy;
 		int lvl;
+		Item_Search_Plate heritage_item;
 	public:
 		Enemy();
 		~Enemy();
 		const std::string& getName();
 		const std::string& getType();
+		int get_level();
 		const double getHealth();
 		void setName(const std::string& n);
 		void setType(const std::string& t);
@@ -29,6 +31,7 @@ namespace npc
 		void defence(Speclist& specsPlayer);
 		void showCurrentState();
 		bool isAlive();
+		Item_Search_Plate inherit_item();
 
 		friend class BuildWarrior;
 		friend class BuildArcher;
