@@ -14,7 +14,7 @@
 /*int maine()
 {
 	srand(static_cast<unsigned int>(time(NULL)));
-	Manager test_manager;
+	/*Manager test_manager;
 
 	test_manager.startNewGame();
 
@@ -23,7 +23,15 @@
 	test_manager.putNPC(&enemy_player);
 
 	test_manager.GameLoop();
-	
+	*/
+	int amount = 5;
+	std::vector<std::shared_ptr<npc::Enemy>> enemyList(amount);
+	npc::Director director;
+	npc::createEnemy(director, amount, enemyList);
+	for (int i = 0; i < enemyList.size(); i++)
+	{
+		enemyList.at(i)->showCurrentState();
+	}
 	return 0;
 }*/
 
@@ -55,7 +63,7 @@ int main() {
 	std::cout << new_chest.get_cap() << std::endl;
 }
 
-int mainn() {
+void mainn() {
 	Speclist new_speclist;
 	std::cout << new_speclist.get(Spec_Types::Agility) << std::endl;
 	return 0;

@@ -1,19 +1,23 @@
 #pragma once
 #include "NPC.h"
+#include "Player.h"
+#include <string>
 
 namespace npc
 {
-	class NotEnemy : public InfNPC
+	class NotEnemy
 	{
 	private:
-		int m_amountOfTypes = 3;
-		std::pair<std::string, bool>* m_typeOfNEnemy = new std::pair<std::string, bool>[m_amountOfTypes];
+		std::string m_name;
+		std::string m_type;
 	public:
 		NotEnemy();
 		~NotEnemy();
+		const std::string& getName();
 		const std::string& getType();
-		void heal();
+		void heal(Player& player);
 		/*bool trade();*/
+		//void repair(Item& item);
 	};
 }
 

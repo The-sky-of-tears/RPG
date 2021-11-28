@@ -22,6 +22,11 @@ const int& Player::getHealthPoints()
 	return health_points;
 }
 
+int& Player::setHeal()
+{
+	return health_points;
+}
+
 bool Player::isAlive()
 {
 	return health_points <= 0 ? 0 : 1;

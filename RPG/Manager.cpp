@@ -76,7 +76,7 @@ int Manager::startFight(npc::Enemy* current_enemy) //0 player win, 1 - player lo
 	{
 		if (player_turn)
 		{
-			current_enemy->defence(current_player->attack());
+			//current_enemy->defence(/*current_player->attack()*/);
 			current_enemy->showCurrentState();
 			std::cout << std::endl;
 
