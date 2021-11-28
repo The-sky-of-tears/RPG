@@ -5,7 +5,7 @@ npc::Enemy::Enemy() : lvl(0) {}
 npc::Enemy::~Enemy() {}
 
 const std::string& npc::Enemy::getName() { return m_name; }
-const std::string& npc::Enemy::getType() { return m_name; }
+const std::string& npc::Enemy::getType() { return m_type; }
 
 const double npc::Enemy::getHealth()
 { 

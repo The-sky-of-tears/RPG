@@ -14,7 +14,7 @@
 int main()
 {
 	srand(static_cast<unsigned int>(time(NULL)));
-	Manager test_manager;
+	/*Manager test_manager;
 
 	test_manager.startNewGame();
 
@@ -23,7 +23,10 @@ int main()
 	test_manager.putNPC(&enemy_player);
 
 	test_manager.GameLoop();
-	
+	*/
+	npc::Director director;
+	std::shared_ptr<npc::Enemy> enemy = npc::createEnemy(director);
+	enemy->showCurrentState();
 	return 0;
 }
 
