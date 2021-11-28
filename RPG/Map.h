@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <fstream>
+#include <vector>
 
 //#include "include/single_include/nlohmann/json.hpp"
 #include "Helpers.h"
@@ -16,19 +17,25 @@ private:
 
 	std::pair<int, int> player_pos;
 
+	std::vector<Chest> chests;
 
 	void setDefaultTiles();
 	void setPlayer(std::pair<int, int> player_tile);
 
 public:
 	Map();
-	Map(std::pair<int, int> player_coords);
+	Map(std::pair<int, int> player_coords, 
+		std::vector<std::shared_ptr<npc::Enemy>> enemies_to_set, std::vector < std::pair<int, int>> enemies_coords, 
+		std::vector<Chest> chests_to_set, std::vector <std::pair<int, int>> chest_coords);
 	~Map();
 
 	std::pair<int, int> getSize();
 
-	void setNPC(npc::Enemy* NPC, std::pair<int, int> npc_coords);
+	void setNPC(std::shared_ptr<npc::Enemy> NPC, std::pair<int, int> npc_coords);
 	void unsetNPC(std::pair<int, int> npc_coords);
+
+	void setChest(Chest* chest_to_set, std::pair<int, int> chest_coords);
+	void unsetChest(std::pair<int, int> chest_coords);
 
 	std::pair<int, int> getPlayerPos();
 
@@ -38,8 +45,11 @@ public:
 	bool checkTileForNPC(std::pair<int, int> tile_to_check);
 	bool checkTileForChest(std::pair<int, int> tile_to_check);
 
-	npc::Enemy* getPlayerTileNPC();
-	void burryPlayerTileNPC();
+	std::shared_ptr<npc::Enemy> getPlayerTileNPC();
+	Chest* getPlayerTileChest();
+
+	void burryPlayerTileNPC(Chest dead_loot);
+	void burryPlayerTileChest();
 
 };
 

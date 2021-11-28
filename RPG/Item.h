@@ -5,7 +5,9 @@
 #include <vector>
 #include "include/single_include/nlohmann/json.hpp"
 
+#include "DB.h"
 #include "Speclist.h"
+
 
 
 enum class Item_Types {
@@ -20,20 +22,20 @@ enum class Item_Types {
 	END
 };
 
-struct Change_List  // z = a*x + b*y + c
+struct ChangeList  // z = a*x + b*y + c
 {
-	Item_Types changed_z;
+	int changed_z;
 
-	float const_a;
-	Item_Types dep_x;
+	double const_a;
+	int dep_x;
 
-	float const_b;
-	Item_Types dep_y;
+	double const_b;
+	int dep_y;
 
-	float const_c;
+	double const_c;
 
-	float z_min;
-	float z_max;
+	double z_min;
+	double z_max;
 };
 
 struct Item_Search_Plate {
@@ -55,16 +57,22 @@ private:
 	int durability;
 	int max_durability;
 
-	std::vector<Change_List> spec_change;
+	std::vector<ChangeList> spec_change;
 
-	std::vector<Change_List> durability_coef;
+	std::vector<ChangeList> durability_coef;
 
 	Item_Search_Plate transform_to;
 	int transform_when;
 
+	std::vector <ChangeList> get_spec_change(nlohmann::json spec_change_list);
+	void apply_spec_change(Speclist *Player_Specs, std::vector<ChangeList> application, int mul);
+
+	void transform_item(Item_Search_Plate transform_plate);
+
 
 public:
-	Item(nlohmann::json* item_db, int item_class, std::string item_name);
+	Item(int item_class, std::string item_name);
+	Item(Item_Search_Plate item_plate);
 	std::string getName();
 	std::string getDescription();
 
@@ -72,6 +80,8 @@ public:
 
 	int getWeight();
 	int getDurability();
+
+	void repairItem();
 
 	Speclist useItem(Speclist Player_Specs);
 };

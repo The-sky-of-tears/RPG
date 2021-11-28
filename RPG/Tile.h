@@ -20,7 +20,7 @@ private:
 	bool is_player_here;
 	
 	bool is_npc_here;
-	npc::Enemy* npc;
+	std::shared_ptr<npc::Enemy> npc;
 
 	bool is_chest_here;
 	Chest* chest;
@@ -33,14 +33,18 @@ public:
 	void setPlayer();
 	void unsetPlayer();
 
-	void setNPC(npc::Enemy* npc_to_set);
-	npc::Enemy* unsetNPC();
+	void setNPC(std::shared_ptr<npc::Enemy> npc_to_set);
+	std::shared_ptr<npc::Enemy> unsetNPC();
+
+	void setChest(Chest* chest_to_set);
+	Chest* unsetChest();
 
 	Tile_Types getType();
 	bool checkForPlayer();
 	bool checkForNPC();
 	bool checkForChest();
 
-	npc::Enemy* returnNPC();
+	std::shared_ptr<npc::Enemy> returnNPC();
+	Chest* returnChest();
 
 };

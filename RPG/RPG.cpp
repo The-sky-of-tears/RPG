@@ -3,15 +3,15 @@
 #include <ctime>
 
 #include <iomanip>
-#include <sstream>
 
 
 #include "Player.h"
 #include "Enemy.h"
 #include "Manager.h"
 #include "Item.h"
+#include "Chest.h"
 
-int main()
+/*int maine()
 {
 	srand(static_cast<unsigned int>(time(NULL)));
 	Manager test_manager;
@@ -25,29 +25,38 @@ int main()
 	test_manager.GameLoop();
 	
 	return 0;
-}
+}*/
 
 
 
 using json = nlohmann::json;
 
-int maine()
+int mainnnn()
 {
-    std::string items_json = "Data//Items.json";
-    // parse and serialize JSON
-    std::string data = Helpers::read_file_to_string(items_json);
 
-    json opened = json::parse(data);
-    std::cout << std::setw(4) << opened << "\n\n";
-
-	Item new_item(&opened, 5, "Wooden stick");
-
+	Item new_item(5, "Wooden stick");
 	std::cout << new_item.getWeight() << std::endl;
 	return 0;
 
 }
 
+int main() {
+	Item_Search_Plate new_plate;
+	new_plate.name = "Wooden stick";
+	new_plate.type = "5";
+	Chest new_chest(new_plate, 30, 5);
+	std::vector<Item> list = new_chest.get_item_list();
+
+	for (auto i : list) {
+		std::cout << i.getName() << std::endl;
+	}
+
+	std::cout << new_chest.is_empty() << std::endl;
+	std::cout << new_chest.get_cap() << std::endl;
+}
+
 int mainn() {
 	Speclist new_speclist;
 	std::cout << new_speclist.get(Spec_Types::Agility) << std::endl;
+	return 0;
 }

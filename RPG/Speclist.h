@@ -2,6 +2,7 @@
 enum class Spec_Types {
 	Coin,
 	Expreience,
+
 	/*				S.P.E.C.I.A.L. LIST
 *At start of game each spec is changable and = 5, also player has 5 adittional points to spread between theese*/
 
@@ -19,7 +20,8 @@ enum class Spec_Types {
 	Health_regen, // enduranse / 3, but not less, than 1 (may be % of max health)
 	Armor_class, // %, starts with agility, changes with armor, amplifies chances of enemy to fully miss
 
-	Crit_resist, //% chances of rejecting crit attack
+	Crit_reject, //% chances of rejecting crit attack
+
 	Damage_resist, //% how less dmg will player get, range 0%-85%, default -- 0
 	Meele_resist,
 	Deafening_resist,
