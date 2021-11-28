@@ -1,38 +1,36 @@
 #include "NotEnemy.h"
+#include <cstdlib>
 
 npc::NotEnemy::NotEnemy()
 {
-	m_typeOfNEnemy[0] = { "Merchant", 0 };
-	m_typeOfNEnemy[1] = { "Arms dealer", 0 };
-	m_typeOfNEnemy[2] = { "Nurse", 0 };
-	m_typeOfNEnemy[rand() % m_amountOfTypes].second = 1;
+	InfNPC data;
+	m_name = data.m_arrOfNames[rand() % 5];
+	m_type = data.m_arrOfTypesNEnemy[rand() % 3];
 }
 
-npc::NotEnemy::~NotEnemy()
+npc::NotEnemy::~NotEnemy() {}
+
+const std::string& npc::NotEnemy::getName()
 {
-	delete[] m_typeOfNEnemy;
+	return m_name;
 }
 
 const std::string& npc::NotEnemy::getType()
 {
-	for (int i = 0; i < m_amountOfTypes; i++)
-	{
-		if (m_typeOfNEnemy[i].second == 1)
-		{
-			return m_typeOfNEnemy[i].first;
-		}
-	}
+	return m_type;
 }
 
-void npc::NotEnemy::heal()
+void npc::NotEnemy::heal(Player& player)
 {
-	if (m_typeOfNEnemy[3].second == 1)
-	{
-		m_health += m_health * 0.25;
-	}
+	player.setHeal() += 50;
 }
 
 //bool npc::NotEnemy::trade()
+//{
+//
+//}
+
+//void repair(Item& item)
 //{
 //
 //}

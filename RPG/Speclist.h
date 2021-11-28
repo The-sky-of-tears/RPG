@@ -64,4 +64,3 @@ public:
 		return specs[static_cast<int>(spec)];
 	}
 };
-

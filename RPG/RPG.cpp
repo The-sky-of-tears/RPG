@@ -47,7 +47,7 @@ int maine()
 
 }
 
-int mainn() {
+void mainn() {
 	Speclist new_speclist;
 	std::cout << new_speclist.get(Spec_Types::Agility) << std::endl;
 }

@@ -42,6 +42,8 @@ public:
 
 	const int& getHealthPoints();
 
+	int& setHeal();
+
 	bool isAlive();
 
 	const std::pair<int, int>& getPosition();
