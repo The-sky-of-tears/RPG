@@ -17,6 +17,11 @@ void npc::Enemy::setName(const std::string& n)
 	m_name = n;
 }
 
+int npc::Enemy::get_level()
+{
+	return lvl;
+}
+
 void npc::Enemy::setType(const std::string& t)
 {
 	m_type = t;
@@ -37,9 +42,14 @@ Speclist npc::Enemy::attack()
 	return specsEnemy;
 }
 
+Item_Search_Plate npc::Enemy::inherit_item()
+{
+	return heritage_item;
+}
+
 void npc::Enemy::defence(Speclist& specsPlayer)
 {
-	int health_lost = static_cast<int>((specsEnemy.get(Spec_Types::Damage_resist) / 100) * specsPlayer.get(Spec_Types::Damage));
+	int health_lost = specsPlayer.get(Spec_Types::Damage);
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Meele_resist) / 100) * specsPlayer.get(Spec_Types::Meele_damage));
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Deafening_resist) / 100) * specsPlayer.get(Spec_Types::Deafening_damage));
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Poision_resist) / 100) * specsPlayer.get(Spec_Types::Poision_damage));
@@ -79,9 +89,9 @@ void npc::BuildWarrior::nameTypeLevel()
 	InfNPC obj;
 	enemy->setName(obj.m_arrOfNames[rand() % 5]);
 	enemy->setType(obj.m_arrOfTypesEnemy[0]);
-	enemy->setLvl(0);
+	enemy->setLvl(1);
 }
-void npc::BuildWarrior::specsOfEnemy(/*nlohmann::json* item_db*/)
+void npc::BuildWarrior::specsOfEnemy()
 {
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Agility)] = static_cast<int>(3 + enemy->lvl / static_cast<double>(3));
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Strength)] = static_cast<int>(2 + enemy->lvl / static_cast<double>(3));
@@ -92,10 +102,13 @@ void npc::BuildWarrior::specsOfEnemy(/*nlohmann::json* item_db*/)
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Damage)] = 2;
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Crit_chance)] = 25;
 
-	//Item weapon(item_db, 5, "Rusted Sword");
-	//enemy->specsEnemy = weapon.useItem(enemy->specsEnemy);
-	//Item armor(item_db, 0, "Formless piece of cloth");
-	//enemy->specsEnemy = armor.useItem(enemy->specsEnemy);
+	Item weapon( 5, "Rusted Sword");
+	enemy->specsEnemy = weapon.useItem(enemy->specsEnemy);
+	Item armor( 0, "Formless piece of cloth");
+	enemy->specsEnemy = armor.useItem(enemy->specsEnemy);
+
+	if (rand() % 2 == 0) enemy->heritage_item = Item_Search_Plate("5", "Rusted Sword");
+	else enemy->heritage_item = Item_Search_Plate("0", "Formless piece of cloth");
 }
 
 npc::BuildArcher::BuildArcher() : EnemyBuilder() {}
@@ -109,7 +122,7 @@ void npc::BuildArcher::nameTypeLevel()
 	enemy->setType(obj.m_arrOfTypesEnemy[1]);
 	enemy->setLvl(0);
 }
-void npc::BuildArcher::specsOfEnemy(/*nlohmann::json* item_db*/)
+void npc::BuildArcher::specsOfEnemy()
 {
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Perception)] = static_cast<int>(3 + enemy->lvl / static_cast<double>(3));
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Strength)] = static_cast<int>(2 + enemy->lvl / static_cast<double>(3));
@@ -120,10 +133,13 @@ void npc::BuildArcher::specsOfEnemy(/*nlohmann::json* item_db*/)
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Damage)] = 0;
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Crit_chance)] = 25;
 
-	/*Item weapon(item_db, 5, "Bow");
+	Item weapon( 5, "Bow");
 	enemy->specsEnemy = weapon.useItem(enemy->specsEnemy);
-	Item armor(item_db, 0, "Formless piece of cloth");
-	enemy->specsEnemy = armor.useItem(enemy->specsEnemy);*/
+	Item armor( 0, "Formless piece of cloth");
+	enemy->specsEnemy = armor.useItem(enemy->specsEnemy);
+
+	if (rand() % 2 == 0) enemy->heritage_item = Item_Search_Plate("5", "Bow");
+	else enemy->heritage_item = Item_Search_Plate("0", "Formless piece of cloth");
 }
 
 npc::BuildMagician::BuildMagician() : EnemyBuilder() {}
@@ -137,7 +153,7 @@ void npc::BuildMagician::nameTypeLevel()
 	enemy->setType(obj.m_arrOfTypesEnemy[2]);
 	enemy->setLvl(0);
 }
-void npc::BuildMagician::specsOfEnemy(/*nlohmann::json* item_db*/)
+void npc::BuildMagician::specsOfEnemy()
 {
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Intelligence)] = static_cast<int>(3 + enemy->lvl / static_cast<double>(3));
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Agility)] = static_cast<int>(1 + enemy->lvl / static_cast<double>(3));
@@ -148,10 +164,13 @@ void npc::BuildMagician::specsOfEnemy(/*nlohmann::json* item_db*/)
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Damage)] = 0;
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Crit_chance)] = 25;
 
-	//Item weapon(item_db, 5, "Magic Wand");
-	//enemy->specsEnemy = weapon.useItem(enemy->specsEnemy);
-	//Item armor(item_db, 0, "Formless piece of cloth");
-	//enemy->specsEnemy = armor.useItem(enemy->specsEnemy);
+	Item weapon( 5, "Magic Wand");
+	enemy->specsEnemy = weapon.useItem(enemy->specsEnemy);
+	Item armor( 0, "Formless piece of cloth");
+	enemy->specsEnemy = armor.useItem(enemy->specsEnemy);
+
+	if (rand() % 2 == 0) enemy->heritage_item = Item_Search_Plate("5", "Magic Wand");
+	else enemy->heritage_item = Item_Search_Plate("0", "Formless piece of cloth");
 }
 
 npc::Director::Director() : builder(nullptr) {}
@@ -162,11 +181,11 @@ void npc::Director::setBuilder(EnemyBuilder* b)
 	builder = b;
 }
 
-void npc::Director::build(/*nlohmann::json* item_db*/)
+void npc::Director::build()
 {
 	builder->createNewEnemy();
 	builder->nameTypeLevel();
-	builder->specsOfEnemy(/*item_db*/);
+	builder->specsOfEnemy();
 }
 
 std::shared_ptr<npc::Enemy> npc::Director::getEnemy()
@@ -184,21 +203,21 @@ void/*std::shared_ptr<npc::Enemy>*/ npc::createEnemy(Director& director, int amo
 		{
 			BuildWarrior warriorBuilder;
 			director.setBuilder(&warriorBuilder);
-			director.build(/*item_db*/);
+			director.build();
 			enemyList.at(i) = director.getEnemy();
 		}
 		else if (typeOfEnemy == 1)
 		{
 			BuildArcher archerBuilder;
 			director.setBuilder(&archerBuilder);
-			director.build(/*item_db*/);
+			director.build();
 			enemyList.at(i) = director.getEnemy();
 		}
 		else if (typeOfEnemy)
 		{
 			BuildMagician magicianBuilder;
 			director.setBuilder(&magicianBuilder);
-			director.build(/*item_db*/);
+			director.build();
 			enemyList.at(i) = director.getEnemy();
 		}
 	}

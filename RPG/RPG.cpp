@@ -3,13 +3,13 @@
 #include <ctime>
 
 #include <iomanip>
-#include <sstream>
 
 
 #include "Player.h"
 #include "Enemy.h"
 #include "Manager.h"
 #include "Item.h"
+#include "Chest.h"
 
 int main()
 {
@@ -37,29 +37,4 @@ int main()
 	test->showCurrentState();
 
 	return 0;
-}
-
-
-
-using json = nlohmann::json;
-
-int maine()
-{
-    std::string items_json = "Data//Items.json";
-    // parse and serialize JSON
-    std::string data = Helpers::read_file_to_string(items_json);
-
-    json opened = json::parse(data);
-    std::cout << std::setw(4) << opened << "\n\n";
-
-	Item new_item(&opened, 5, "Wooden stick");
-
-	std::cout << new_item.getWeight() << std::endl;
-	return 0;
-
-}
-
-void mainn() {
-	Speclist new_speclist;
-	std::cout << new_speclist.get(Spec_Types::Agility) << std::endl;
 }

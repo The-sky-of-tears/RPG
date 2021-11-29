@@ -2,7 +2,9 @@ import re
 import os
 
 def replacer(text):
-	patterns ='''Strength,
+	patterns ='''Coin,
+	Expreience,
+	Strength,
 	Perception,
 	Endurance,
 	Charisma,
@@ -13,7 +15,7 @@ def replacer(text):
 	Health,
 	Health_regen,
 	Armor_class,
-	Crit_resist,
+	Crit_reject,
 	Damage_resist,
 	Meele_resist,
 	Deafening_resist,
@@ -32,8 +34,10 @@ def replacer(text):
 	Running_time,
 	Carry_weight'''
 	patterns = patterns.split(',\n\t')
+	
 	for x in range(len(patterns)):
 		patterns[x] = '"'+patterns[x]+'"'
+	
 	for x in range(len(patterns)):
 		result= re.sub(patterns[x],str(x), text)
 		text = result
@@ -52,3 +56,4 @@ if __name__ == '__main__':
 		file = open("Data\\"+file_name, 'w')
 		file.write(file_data)
 		file.close()
+	

@@ -30,13 +30,25 @@ void Tile::unsetPlayer()
 	is_player_here = false;
 }
 
-void Tile::setNPC(npc::Enemy* npc_to_set)
+void Tile::setNPC(std::shared_ptr<npc::Enemy> npc_to_set)
 {
 	is_npc_here = true;
 	npc = npc_to_set;
 }
 
-npc::Enemy* Tile::unsetNPC()
+void Tile::setChest(Chest* chest_to_set)
+{
+	is_chest_here = true;
+	chest = chest_to_set;
+}
+
+Chest* Tile::unsetChest()
+{
+	is_chest_here = false;
+	return chest;
+}
+
+std::shared_ptr<npc::Enemy> Tile::unsetNPC()
 {
 	is_npc_here = false;
 	return npc;
@@ -62,7 +74,12 @@ bool Tile::checkForChest()
 	return is_chest_here;
 }
 
-npc::Enemy* Tile::returnNPC()
+std::shared_ptr<npc::Enemy> Tile::returnNPC()
 {
 		return npc;
+}
+
+Chest* Tile::returnChest()
+{
+	return chest;
 }

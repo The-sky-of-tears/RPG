@@ -11,7 +11,7 @@ Map::Map()
 	setPlayer({ map_size.first / 2, map_size.second / 2 });
 }
 
-Map::Map(std::pair<int, int> player_coords)
+Map::Map(std::pair<int, int> player_coords, std::vector<std::shared_ptr<npc::Enemy>> enemies_to_set, std::vector<std::pair<int, int>> enemies_coords, std::vector<Chest> chests_to_set, std::vector<std::pair<int, int>> chests_coords)
 {
 	map_size = std::make_pair(10, 10);
 	map = new Tile * [map_size.first];
@@ -19,6 +19,15 @@ Map::Map(std::pair<int, int> player_coords)
 
 	setDefaultTiles();
 	setPlayer(player_coords);
+
+	for (int i = 0; (i < enemies_coords.size() && i < enemies_to_set.size()); i++) {
+		setNPC(enemies_to_set.at(i), enemies_coords.at(i));
+	}
+	
+	chests = chests_to_set;
+	for (int i = 0; (i < enemies_coords.size() && i < enemies_to_set.size()); i++) {
+		setChest(&(chests.at(i)), chests_coords.at(i));
+	}
 }
 
 Map::~Map()
@@ -32,8 +41,7 @@ std::pair<int, int> Map::getSize()
 	return map_size;
 }
 
-
-void Map::setNPC(npc::Enemy* NPC, std::pair<int, int> npc_coords)
+void Map::setNPC(std::shared_ptr<npc::Enemy> NPC, std::pair<int, int> npc_coords)
 {
 	map[npc_coords.first][npc_coords.second].setNPC(NPC);
 }
@@ -41,6 +49,17 @@ void Map::setNPC(npc::Enemy* NPC, std::pair<int, int> npc_coords)
 void Map::unsetNPC(std::pair<int, int> npc_coords)
 {
 	map[npc_coords.first][npc_coords.second].unsetNPC();
+}
+
+void Map::setChest(Chest* chest_to_set, std::pair<int, int> chest_coords)
+{
+	map[chest_coords.first][chest_coords.second].setChest(chest_to_set);
+}
+
+void Map::unsetChest(std::pair<int, int> chest_coords)
+{
+	map[chest_coords.first][chest_coords.second].unsetChest();
+	//maybe add some vector cleaning queue, but it could not make any sense....
 }
 
 void Map::setDefaultTiles()
@@ -108,13 +127,24 @@ bool Map::checkTileForChest(std::pair<int, int> tile_to_check)
 	return map[tile_to_check.first][tile_to_check.second].checkForChest();
 }
 
-npc::Enemy* Map::getPlayerTileNPC()
+std::shared_ptr<npc::Enemy> Map::getPlayerTileNPC()
 {
 	return map[player_pos.first][player_pos.second].returnNPC();
 }
 
-void Map::burryPlayerTileNPC()
+Chest* Map::getPlayerTileChest()
 {
+	return map[player_pos.first][player_pos.second].returnChest();
+}
+
+void Map::burryPlayerTileNPC(Chest dead_loot)
+{
+	
 	unsetNPC(player_pos);
+}
+
+void Map::burryPlayerTileChest()
+{
+	unsetChest(player_pos);
 }
 

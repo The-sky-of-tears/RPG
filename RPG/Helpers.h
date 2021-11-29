@@ -3,8 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
-#include "include/single_include/nlohmann/json.hpp"
+#include <vector>
 
 namespace Helpers
 {
@@ -39,9 +38,5 @@ namespace Helpers
 
 		return std::string(&bytes[0], fileSize);
 	}
-
-/*	nlohmann::json read_file_to_json(const std::string& fileName) {
-		return nlohmann::json::parse(read_file_to_string(fileName));
-	}*/
 }
 
