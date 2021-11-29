@@ -29,6 +29,8 @@ public:
 
 	void startHeal();
 
+	void openChest(Chest* player_chest);
+
 	void movePlayer();
 
 	void saveGame();

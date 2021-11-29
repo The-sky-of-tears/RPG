@@ -89,6 +89,12 @@ Item::Item(Item_Search_Plate item_plate)
 	transform_item(item_plate);
 }
 
+Item::Item()
+{
+	Item_Search_Plate new_plate("5", "Wooden stick"),
+	transform_item(new_plate);
+}
+
 std::string Item::getName()
 {
 	return name;

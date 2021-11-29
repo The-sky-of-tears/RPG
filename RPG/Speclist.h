@@ -96,7 +96,7 @@ public:
 		specs[static_cast<int>(Spec_Types::Action_points)] = get(Spec_Types::Max_action_points);
 
 		specs[static_cast<int>(Spec_Types::Action_points_regen)] = static_cast<int>((5 + get(Spec_Types::Agility)) / 2);
-		if (get(Spec_Types::Max_action_points) < 1) specs[static_cast<int>(Spec_Types::Max_action_points)] = 1;
+		if (get(Spec_Types::Action_points_regen) < 1) specs[static_cast<int>(Spec_Types::Action_points_regen)] = 1;
 
 		specs[static_cast<int>(Spec_Types::Meele_damage)] = get(Spec_Types::Agility) - 5 ;
 		if (get(Spec_Types::Meele_damage) < 1) specs[static_cast<int>(Spec_Types::Meele_damage)] = 1;

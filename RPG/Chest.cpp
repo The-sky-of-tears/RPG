@@ -25,13 +25,17 @@ Chest::Chest(std::vector<Item_Search_Plate> found_items, int exp, int coin)
 	chest_exp = exp;
 }
 
-int Chest::get_coins()
+int Chest::get_coins(Player* cur_pl)
 {
+	cur_pl->player_speclist.specs[static_cast<int>(Spec_Types::Coin)] += chest_coins;
+	chest_coins = 0;
 	return chest_coins;
 }
 
-int Chest::get_experience()
+int Chest::get_experience(Player* cur_pl)
 {
+	cur_pl->player_speclist.specs[static_cast<int>(Spec_Types::Expreience)]+=chest_exp;
+	chest_exp = 0;
 	return chest_exp;
 }
 
@@ -43,6 +47,17 @@ int Chest::get_cap()
 std::vector<Item> Chest::get_item_list()
 {
 	return chest_inv;
+}
+
+int Chest::pick_item(int item_pos, Player* cur_pl) //returns free space after item is adeed, if space < 0, then item is left in chest
+{
+	int free_space = cur_pl->inv_max_capacity - cur_pl->inv_curr_capacity - chest_inv[item_pos].getWeight();
+	if (free_space < 0) return free_space;
+	else {
+		cur_pl->inventory.insert(chest_inv.end(), chest_inv[item_pos]);
+		cur_pl->inv_curr_capacity += chest_inv[item_pos].getWeight();
+		chest_inv.erase(chest_inv.begin() + item_pos);
+	}
 }
 
 bool Chest::is_empty()

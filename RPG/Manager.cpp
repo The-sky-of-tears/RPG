@@ -117,6 +117,58 @@ void Manager::startHeal()
 
 }
 
+void Manager::openChest(Chest* player_chest)
+{
+	int got_coins = player_chest->get_coins(current_player);
+	int got_exp = player_chest->get_experience(current_player);
+	if (got_coins != 0 || got_exp != 0) {
+		std::cout << "You found and opened a new chest and got:  " << std::endl;
+		std::cout << "\t" << got_coins << "-- coins;" << std::endl;
+		std::cout << "\t" << got_exp << "-- experience;" << std::endl;
+	}
+	std::cout << "You opened same chest again, no coins for you!  " << std::endl;
+	
+	int free_inv_place;
+	int choice_int;
+	while (1) {
+		std::cout << "Choose which item put to an inventory:" << std::endl;
+		std::vector<Item> chest_items = player_chest->get_item_list();
+		for (int i = 0; i < chest_items.size(); i++) {
+			std::cout << i << "\t" << chest_items.at(i).getName() << ";" << std::endl;
+		}
+		std::cout << "Or write (q) to quit back to map" << std::endl;
+		std::string choice;
+		choice_int = -1;
+		std::cin >> choice;
+		std::cout << std::endl;
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			std::cout << "Oops, that input is invalid.  Please try again.\n";
+		}
+		else
+		{
+			std::cin.ignore(32767, '\n');
+			if (choice == "q") {
+				break;
+			}
+			choice_int = stoi(choice);
+			if (choice_int >= chest_items.size()) {
+				std::cout << "There is no item with that num" << std::endl;
+				continue;
+			}
+			free_inv_place = player_chest->pick_item(choice_int, current_player);
+			if (free_inv_place < 0) {
+				std::cout << "There is not enough space in inventory to put this item, you lack  " << free_inv_place << "to do this" << std::endl;;
+			}
+			else {
+				std::cout << "Succsessful, free space:  " << free_inv_place << std::endl;
+			}
+		}
+	}
+}
+
 void Manager::movePlayer()
 {
 

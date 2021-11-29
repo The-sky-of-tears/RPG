@@ -11,7 +11,7 @@
 
 
 enum class Item_Types {
-	Armor,
+	Armor, 
 	Hat,
 	Amplifier,
 	Potion,
@@ -77,6 +77,7 @@ public:
 	Item();
 	Item(int item_class, std::string item_name);
 	Item(Item_Search_Plate item_plate);
+	Item();
 	std::string getName();
 	std::string getDescription();
 
