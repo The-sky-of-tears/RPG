@@ -14,12 +14,11 @@ private:
 
 	std::string name;
 
-	int inv_capacity = 9;
-	std::vector<int> inventory;
+	int inv_max_capacity = 20;
+	int inv_curr_capacity  = 0;
+	std::vector<Item> inventory;
 	
-	//need class Spell ??
-	int spel_capacity = 4;
-	std::vector<std::string> availible_spels;
+
 
 	Player(std::string n);
 

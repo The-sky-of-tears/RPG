@@ -17,13 +17,15 @@ Player* Player::getInstance(std::string n)
 Player::Player(std::string n) :
 	name(n)
 {
-	player_speclist.specs[static_cast<int>(Spec_Types::Max_health)] = 100;
-	player_speclist.specs[static_cast<int>(Spec_Types::Health)] = 100;
-	player_speclist.specs[static_cast<int>(Spec_Types::Health_regen)] = 
-		player_speclist.get(Spec_Types::Health) * 0.1;
+	player_speclist.specs[static_cast<int>(Spec_Types::Strength)] = 4;
+	player_speclist.specs[static_cast<int>(Spec_Types::Perception)] = 4;
+	player_speclist.specs[static_cast<int>(Spec_Types::Endurance)] = 4;
+	player_speclist.specs[static_cast<int>(Spec_Types::Charisma)] = 4;
+	player_speclist.specs[static_cast<int>(Spec_Types::Intelligence)] = 4;
+	player_speclist.specs[static_cast<int>(Spec_Types::Agility)] = 4;
+	player_speclist.specs[static_cast<int>(Spec_Types::Luck)] = 4;
 
-	player_speclist.specs[static_cast<int>(Spec_Types::Damage)] = 30;
-
+	player_speclist.calculate_secondary_stats();
 }
 
 Player::~Player()
@@ -40,6 +42,11 @@ const int& Player::getHealthPoints()
 {
 	return player_speclist.get(Spec_Types::Health);
 }
+
+/*int& Player::setHeal()
+{
+	// TODO: insert return statement here
+}*/
 
 double& Player::setHealth()
 {
@@ -63,6 +70,7 @@ Speclist Player::attack()
 
 bool Player::defence(Speclist enemy_speclist)
 {
+
 	int health_lost = enemy_speclist.get(Spec_Types::Damage);
 	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Meele_resist) / 100) * enemy_speclist.get(Spec_Types::Meele_damage));
 	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Deafening_resist) / 100) * enemy_speclist.get(Spec_Types::Deafening_damage));
