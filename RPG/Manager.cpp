@@ -11,8 +11,7 @@ void Manager::startNewGame()
 
 	std::cin >> new_name;
 
-	Player* current_player = Player::getInstance("qwe");
-	current_player->getInstance("QWe");
+	Player* current_player = Player::getInstance();
 
 	current_map = new Map();
 }
