@@ -38,7 +38,7 @@ const std::string& Player::getName()
 	return name;
 }
 
-const int& Player::getHealthPoints()
+const int& Player::getHealth()
 {
 	return player_speclist.get(Spec_Types::Health);
 }
@@ -60,15 +60,100 @@ const double& Player::getMaxHealth()
 
 bool Player::isAlive()
 {
-	return getHealthPoints() <= 0 ? 0 : 1;
+	return getHealth() <= 0 ? 0 : 1;
 }
 
 Speclist Player::attack()
 {	
-	return player_speclist;
+	/*std::cout << "Your turn!\n";
+
+	std::cout << "Choose action: (a)ttack, (p)otion, (s)kip. \n";*/
+
+	char choice;
+	Speclist list_to_attack = player_speclist;
+
+	if (player_speclist.get(Spec_Types::Max_action_points) - 
+		player_speclist.get(Spec_Types::Action_points) < 
+		player_speclist.get(Spec_Types::Action_points_regen))
+	{
+		player_speclist.specs[static_cast<int>(Spec_Types::Action_points)] =
+			player_speclist.get(Spec_Types::Max_action_points);
+	}
+	else
+	{
+		player_speclist.specs[static_cast<int>(Spec_Types::Action_points)] +=
+			player_speclist.get(Spec_Types::Action_points_regen);
+	}
+
+	while (player_speclist.specs[static_cast<int>(Spec_Types::Action_points)] > 0)
+	{
+		std::cout << "You have : " << player_speclist.get(Spec_Types::Action_points) 
+			<< " action points!\n";
+
+		std::cin >> choice;
+	
+		if (choice == 'a')
+		{			
+			if (equipment.find("Weapon1") == equipment.end() &&
+				equipment.find("Weapon2") == equipment.end())
+			{
+				std::cout << "Seems to be u don't have any weapon. Use your fists.\n";
+				continue;
+			}
+			else
+			{
+				std::cout << "Chose type of attack: \n";
+				std::cout << "Weapon1: " << equipment["Weapon1"].getName() << ", DMG: " <<
+					equipment["Weapon1"].getDescription() << std::endl;
+
+				std::cout << "Weapon2: " << equipment["Weapon2"].getName() << ", DMG: " <<
+					equipment["Weapon2"].getDescription() << std::endl;
+
+				std::cout << "Your choice Weapon(1), Weapon(2):\n";
+				char choice_weapon;
+				std::cin >> choice_weapon;
+
+				while(1)
+				{
+					if (choice_weapon == '1')
+					{
+						list_to_attack = equipment["Weapon1"].useItem(player_speclist);
+					}
+					else if (choice_weapon == '2')
+					{
+						list_to_attack = equipment["Weapon2"].useItem(player_speclist);
+					}
+					else
+					{
+						std::cout << "Incorret input, try again. \n";
+						continue;
+					}
+				}
+			}
+		}
+		else if (choice == 'p')
+		{
+			
+		}
+		else if (choice == 's')
+		{
+			return list_to_attack;
+		}
+		else
+		{
+			std::cout << "Incorret input, try again. \n";
+			continue;
+		}
+
+		player_speclist.specs[static_cast<int>(Spec_Types::Action_points)]--;
+		
+	}
+	
+	std::cout << "You don't have any action points.\n";
+	return list_to_attack;
 }
 
-bool Player::defence(Speclist enemy_speclist)
+void Player::defence(Speclist enemy_speclist)
 {
 
 	int health_lost = enemy_speclist.get(Spec_Types::Damage);
@@ -76,7 +161,8 @@ bool Player::defence(Speclist enemy_speclist)
 	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Deafening_resist) / 100) * enemy_speclist.get(Spec_Types::Deafening_damage));
 	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Poision_resist) / 100) * enemy_speclist.get(Spec_Types::Poision_damage));
 	health_lost /= static_cast<int>(player_speclist.get(Spec_Types::Damage_resist));
-	return isAlive();
+
+	player_speclist.specs[static_cast<int>(Spec_Types::Health)] -= health_lost;
 }
 
 void Player::showFullInfo()
@@ -85,5 +171,14 @@ void Player::showFullInfo()
 	for (int x = 0; x < static_cast<int>(Spec_Types::END); x++) 
 	{
 		std::cout << player_speclist.specs[x] << std::endl;
+	}
+}
+
+void Player::showInventory()
+{
+	int count = 1;
+	for (auto it = inventory.begin(); it != inventory.end(); it++, count++)
+	{
+		std::cout << "Slot [" << count << "] :" << it->getName() << std::endl;
 	}
 }

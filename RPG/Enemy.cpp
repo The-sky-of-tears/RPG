@@ -54,6 +54,8 @@ void npc::Enemy::defence(Speclist specsPlayer)
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Deafening_resist) / 100) * specsPlayer.get(Spec_Types::Deafening_damage));
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Poision_resist) / 100) * specsPlayer.get(Spec_Types::Poision_damage));
 	health_lost /= static_cast<int>(specsEnemy.get(Spec_Types::Damage_resist));
+
+	specsEnemy.specs[static_cast<int>(Spec_Types::Health)] -= health_lost;
 }
 
 void npc::Enemy::showCurrentState()

@@ -33,8 +33,15 @@ int main()
 		enemyList.at(i)->showCurrentState();
 	}
 
-	Player* test = Player::getInstance();
+	/*Player* test = Player::getInstance();
 	test->showFullInfo();
+	test->attack();
+	test->attack();*/
+
+	Manager game_test;
+	game_test.startNewGame();
+	
+	game_test.startFight(enemyList[0]);
 
 	return 0;
 }

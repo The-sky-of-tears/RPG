@@ -60,7 +60,7 @@ public:
 
 	Speclist() {
 		for (int x = 0; x < static_cast<int>(Spec_Types::END); x++) {
-			specs[x] = 0;
+			specs[x] = 1; // был 0, исправил временно из за бага
 		}
 	}
 
@@ -79,7 +79,7 @@ public:
 		specs[static_cast<int>(Spec_Types::Crit_reject)] = get(Spec_Types::Agility) / 2;
 		if (get(Spec_Types::Crit_reject) < 1) specs[static_cast<int>(Spec_Types::Crit_reject)] = 1;
 
-		specs[static_cast<int>(Spec_Types::Damage_resist)] = 0;
+		specs[static_cast<int>(Spec_Types::Damage_resist)] = 1; // был 0, исправил временно из за бага
 
 		specs[static_cast<int>(Spec_Types::Meele_resist)] = 0;
 
@@ -92,6 +92,8 @@ public:
 
 		specs[static_cast<int>(Spec_Types::Max_action_points)] = static_cast<int>((5 + get(Spec_Types::Agility)) / 2);
 		if (get(Spec_Types::Max_action_points) < 1) specs[static_cast<int>(Spec_Types::Max_action_points)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Action_points)] = get(Spec_Types::Max_action_points);
 
 		specs[static_cast<int>(Spec_Types::Action_points_regen)] = static_cast<int>((5 + get(Spec_Types::Agility)) / 2);
 		if (get(Spec_Types::Max_action_points) < 1) specs[static_cast<int>(Spec_Types::Max_action_points)] = 1;

@@ -18,7 +18,9 @@ private:
 	int inv_curr_capacity  = 0;
 	std::vector<Item> inventory;
 	
-
+	//add correct input check
+	std::unordered_map<std::string, Item> equipment;
+	/*std::unordered_map<std::string, Potion>*/
 
 	Player(std::string n);
 
@@ -30,7 +32,7 @@ public:
 
 	const std::string& getName();
 
-	const int& getHealthPoints();
+	const int& getHealth();
 	const double& getMaxHealth();
 
 	double& setHealth();
@@ -39,8 +41,10 @@ public:
 
 	Speclist attack();
 
-	bool defence(Speclist enemy_speclist); // 0 - player is dead, 1 - is alive
+	void defence(Speclist enemy_speclist); // 0 - player is dead, 1 - is alive
 
 	void showFullInfo();
+
+	void showInventory();
 
 };

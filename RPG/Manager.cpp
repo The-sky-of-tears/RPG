@@ -11,7 +11,7 @@ void Manager::startNewGame()
 
 	std::cin >> new_name;
 
-	Player* current_player = Player::getInstance();
+	current_player = Player::getInstance(new_name);
 
 	current_map = new Map();
 }
@@ -57,26 +57,52 @@ void Manager::continueGame()
 
 }
 
-int Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player win, 1 - player loose
+bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player loose, 1 - player win
 {
 	//test segment
+	int test = current_player->getHealth();
+	std::cout << "Fight: " << current_player->getName() << " (" << /*current_player->getHealth()*/test << " HP) VS "
+		<< current_enemy->getName() << " (" << current_enemy->getHealth() << " HP)\n";
 
 	bool player_turn = 1;
 
 	while (1)
 	{
-		if (player_turn)
+		if (player_turn)  
 		{
-			current_player->defence(current_enemy->attack());
+			std::cout << "Your turn!\n";
+
+			std::cout << "Choose action: (a)ttack, (p)otion, (s)kip. \n";
+			
+			current_enemy->defence(current_player->attack());
+
+			std::cout << "Enemy health: " << current_enemy->getHealth() << " HP\n";
+
+			if (!current_enemy->isAlive())
+			{
+				std::cout << "Enemy is dead\n"; // test, нужно открыть сундук, наверное
+				return 1;
+			}
+
+			player_turn = !player_turn;
 		}
 		else
 		{
+			std::cout << "Enemy turn!\n";
+
+			current_player->defence(current_enemy->attack());
+
+			std::cout << current_player->getHealth() << std::endl;
+			std::cout << "Your health: " << current_player->getHealth() << " HP\n";
+
 			if (!current_player->isAlive())
 			{
 				std::cout << "Noob, delete the game! ^_^ \n";
-				return 1;
+				return 0;
 			}
-			current_enemy->defence(current_player->attack());
+
+			player_turn = !player_turn;
+
 		}
 	}
 }

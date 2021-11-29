@@ -1,5 +1,11 @@
 #include "Item.h"
 
+Item::Item()
+{
+	Item_Search_Plate new_plate("5", "Wooden stick"),
+		transform_item(new_plate);
+}
+
 std::vector<ChangeList> Item::get_spec_change(nlohmann::json spec_change_list)
 {
 	std::vector<ChangeList> new_spec_change;

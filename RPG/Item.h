@@ -72,9 +72,9 @@ private:
 	void apply_spec_change(Speclist *Player_Specs, std::vector<ChangeList> application, int mul);
 
 	void transform_item(Item_Search_Plate transform_plate);
-
-
+	
 public:
+	Item();
 	Item(int item_class, std::string item_name);
 	Item(Item_Search_Plate item_plate);
 	std::string getName();
