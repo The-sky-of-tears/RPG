@@ -67,16 +67,16 @@ int Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player wi
 	{
 		if (player_turn)
 		{
-			
+			current_player->defence(current_enemy->attack());
 		}
 		else
 		{
-
 			if (!current_player->isAlive())
 			{
 				std::cout << "Noob, delete the game! ^_^ \n";
 				return 1;
 			}
+			current_enemy->defence(current_player->attack());
 		}
 	}
 }

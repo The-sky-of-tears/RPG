@@ -28,7 +28,7 @@ namespace npc
 		void setLvl(int l);
 		void healthCheck();
 		Speclist attack();
-		void defence(Speclist& specsPlayer);
+		void defence(Speclist specsPlayer);
 		void showCurrentState();
 		bool isAlive();
 		Item_Search_Plate inherit_item();

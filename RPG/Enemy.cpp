@@ -47,7 +47,7 @@ Item_Search_Plate npc::Enemy::inherit_item()
 	return heritage_item;
 }
 
-void npc::Enemy::defence(Speclist& specsPlayer)
+void npc::Enemy::defence(Speclist specsPlayer)
 {
 	int health_lost = specsPlayer.get(Spec_Types::Damage);
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Meele_resist) / 100) * specsPlayer.get(Spec_Types::Meele_damage));
