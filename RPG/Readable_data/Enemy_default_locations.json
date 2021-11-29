@@ -1,0 +1,26 @@
+{
+	"Chests": [
+		{
+			"pos":[ 6, 6 ],
+			"coin": 20,
+			"exp": 40,
+			"items": [
+				{
+					"type": "5",
+					"name": "Rusted Sword"
+				},
+				{
+					"type": "5",
+					"name": "Bow"
+				},
+				{
+					"type": "0",
+					"name": "Stupid_costume"
+				}
+			]
+		}
+	],
+	"Enemies":[
+		[7,7], [9,8], [1,1], [1,3]
+	]
+}

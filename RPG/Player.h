@@ -22,6 +22,8 @@ private:
 
 	Player(std::string n);
 
+	friend class Chest;
+
 public:
 
 	static Player* getInstance(std::string n = "Player1");

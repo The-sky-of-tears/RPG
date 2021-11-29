@@ -2,6 +2,7 @@
 #include <array>
 #include <vector>
 #include "Item.h"
+#include "Player.h"
 class Chest
 {
 private:
@@ -14,11 +15,11 @@ public:
 	Chest(Item_Search_Plate dropped_item, int exp, int coin);
 	Chest(std::vector<Item_Search_Plate> found_items, int exp, int coin);
 	
-	int get_coins();
-	int get_experience();
+	int get_coins(Player* cur_pl);
+	int get_experience(Player* cur_pl);
 	int get_cap();
 	std::vector<Item> get_item_list();
-	//Item pick_item(int item_pos);
+	int pick_item(int item_pos, Player* cur_pl);
 	bool is_empty();
 };
 
