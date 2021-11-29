@@ -14,7 +14,6 @@ private:
 
 	std::string name;
 
-	//need class Item
 	int inv_capacity = 9;
 	std::vector<int> inventory;
 	
@@ -38,10 +37,10 @@ public:
 
 	bool isAlive();
 
-	const std::pair<std::string, int>& attack();
+	Speclist attack();
 
-	void defence(std::pair<std::string, int> hit);
+	bool defence(Speclist enemy_speclist); // 0 - player is dead, 1 - is alive
 
-	void showCurrentState();
+	void showFullInfo();
 
 };

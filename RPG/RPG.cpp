@@ -34,7 +34,7 @@ int main()
 	}
 
 	Player* test = Player::getInstance();
-	test->showCurrentState();
+	test->showFullInfo();
 
 	return 0;
 }

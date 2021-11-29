@@ -10,6 +10,7 @@ Player* Player::getInstance(std::string n)
 	{
 		instance = new Player(n);
 	}
+
 	return instance;
 }
 
@@ -20,6 +21,7 @@ Player::Player(std::string n) :
 	player_speclist.specs[static_cast<int>(Spec_Types::Health)] = 100;
 	player_speclist.specs[static_cast<int>(Spec_Types::Health_regen)] = 
 		player_speclist.get(Spec_Types::Health) * 0.1;
+
 	player_speclist.specs[static_cast<int>(Spec_Types::Damage)] = 30;
 
 }
@@ -46,22 +48,25 @@ double& Player::setHealth()
 
 bool Player::isAlive()
 {
-	return player_speclist.get(Spec_Types::Health) <= 0 ? 0 : 1;
+	return getHealthPoints() <= 0 ? 0 : 1;
 }
 
-const std::pair<std::string, int>& Player::attack()
+Speclist Player::attack()
+{	
+	return player_speclist;
+}
+
+bool Player::defence(Speclist enemy_speclist)
 {
-	
-	std::pair<std::string, int> k;
-	return k;
+	int health_lost = enemy_speclist.get(Spec_Types::Damage);
+	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Meele_resist) / 100) * enemy_speclist.get(Spec_Types::Meele_damage));
+	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Deafening_resist) / 100) * enemy_speclist.get(Spec_Types::Deafening_damage));
+	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Poision_resist) / 100) * enemy_speclist.get(Spec_Types::Poision_damage));
+	health_lost /= static_cast<int>(player_speclist.get(Spec_Types::Damage_resist));
+	return isAlive();
 }
 
-void Player::defence(std::pair<std::string, int> hit)
-{
-	
-}
-
-void Player::showCurrentState()
+void Player::showFullInfo()
 {
 	std::cout << "Name: " << Player::getName() << std::endl;
 	for (int x = 0; x < static_cast<int>(Spec_Types::END); x++) 
