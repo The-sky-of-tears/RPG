@@ -1,4 +1,5 @@
 #pragma once
+
 enum class Spec_Types {
 	Coin,
 	Expreience,
@@ -49,6 +50,7 @@ enum class Spec_Types {
 
 	END
 };
+
 class Speclist
 {
 public:

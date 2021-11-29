@@ -37,6 +37,5 @@ public:
 
 	void exit();
 
-	
 };
 

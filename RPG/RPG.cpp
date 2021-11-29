@@ -32,6 +32,10 @@ int main()
 	{
 		enemyList.at(i)->showCurrentState();
 	}
+
+	Player* test = Player::getInstance();
+	test->showCurrentState();
+
 	return 0;
 }
 

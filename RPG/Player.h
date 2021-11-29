@@ -1,40 +1,32 @@
 #pragma once
 #include <string>
+#include <vector>
 
 #include "Item.h"
+#include "Speclist.h"
 
 class Player
 {
 private:
+	static Player* instance;
+
+	Speclist player_speclist;
+
 	std::string name;
-	int health_points = 100; // > 0 ... normal state, <= 0 - dead
-	int default_dmg = 30;
 
-	//need classItem
+	//need class Item
 	int inv_capacity = 9;
-	int* inventory = new int[inv_capacity];
+	std::vector<int> inventory;
 	
-	//need classSpell ??
+	//need class Spell ??
 	int spel_capacity = 4;
-	std::pair<std::string, int>* availible_spels = new std::pair<std::string,
-		int>[spel_capacity] { {"water", default_dmg}, { "earth", default_dmg },
-			{ "fire", default_dmg }, { "air", default_dmg }};
+	std::vector<std::string> availible_spels;
 
-	//add to hash-table
-	float water_resist = 1;
-	float earth_resist = 1;
-	float fire_resist = 1;
-	float air_resist = 1.5;
-
-	//depends on items
-	int crit_dmg_chance = 10; //0 - 0%, 100 - 100%
-	float crit_dmg_increase = 1.5; // default_dmg * crit_dmg_increase
-
-	// ??
-	std::pair<int, int> position = {0, 0};
+	Player(std::string n);
 
 public:
-	Player(std::string n = "Player1");
+
+	static Player* getInstance(std::string n = "Player1");
 
 	~Player();
 
@@ -42,11 +34,9 @@ public:
 
 	const int& getHealthPoints();
 
-	int& setHeal();
+	double& setHealth();
 
 	bool isAlive();
-
-	const std::pair<int, int>& getPosition();
 
 	const std::pair<std::string, int>& attack();
 

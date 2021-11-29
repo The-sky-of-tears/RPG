@@ -4,14 +4,15 @@
 
 void Manager::startNewGame()
 {
-	std::cout << "Welcome to the Hell!\n" << 
+	std::cout << "Welcome to the Game!\n" << 
 		"Enter your name: ";
 
 	std::string new_name;
 
 	std::cin >> new_name;
 
-	current_player = new Player(new_name);
+	Player* current_player = Player::getInstance("qwe");
+	current_player->getInstance("QWe");
 
 	current_map = new Map;
 }
@@ -65,36 +66,16 @@ int Manager::startFight(npc::Enemy* current_enemy) //0 player win, 1 - player lo
 {
 	//test segment
 
-	current_player->showCurrentState();
-	std::cout << " VS ";
-	current_enemy->showCurrentState();
-	std::cout << std::endl;
-
 	bool player_turn = 1;
 
 	while (1)
 	{
 		if (player_turn)
 		{
-			//current_enemy->defence(/*current_player->attack()*/);
-			current_enemy->showCurrentState();
-			std::cout << std::endl;
-
-			player_turn = 0;
-
-			if (!current_enemy->isAlive())
-			{
-				std::cout << "Easy win! GG WP! \n";
-				return 0;
-			}
+			
 		}
 		else
 		{
-			current_player->defence(current_player->attack());
-			current_player->showCurrentState();
-			std::cout << std::endl;
-
-			player_turn = 1;
 
 			if (!current_player->isAlive())
 			{

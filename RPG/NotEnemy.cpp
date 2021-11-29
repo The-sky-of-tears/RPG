@@ -22,7 +22,7 @@ const std::string& npc::NotEnemy::getType()
 
 void npc::NotEnemy::heal(Player& player)
 {
-	player.setHeal() += 50;
+	player.setHealth() += 50;
 }
 
 //bool npc::NotEnemy::trade()
