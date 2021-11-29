@@ -32,6 +32,7 @@ public:
 	const std::string& getName();
 
 	const int& getHealthPoints();
+	const double& getMaxHealth();
 
 	double& setHealth();
 

@@ -46,6 +46,11 @@ double& Player::setHealth()
 	return player_speclist.specs[static_cast<int>(Spec_Types::Health)];
 }
 
+const double& Player::getMaxHealth()
+{
+	return player_speclist.specs[static_cast<int>(Spec_Types::Max_health)];
+}
+
 bool Player::isAlive()
 {
 	return getHealthPoints() <= 0 ? 0 : 1;

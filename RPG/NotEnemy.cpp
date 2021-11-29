@@ -22,7 +22,7 @@ const std::string& npc::NotEnemy::getType()
 
 void npc::NotEnemy::heal(Player& player)
 {
-	player.setHealth() += 50;
+	player.setHealth() = player.getMaxHealth();
 }
 
 //bool npc::NotEnemy::trade()
