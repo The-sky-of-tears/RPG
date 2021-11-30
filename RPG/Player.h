@@ -52,4 +52,8 @@ public:
 
 	void showInventory();
 
+	void showEquipment();
+
+	void openInventory();
+
 };

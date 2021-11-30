@@ -74,10 +74,6 @@ bool Player::isAlive()
 
 Speclist Player::attack()
 {	
-	/*std::cout << "Your turn!\n";
-
-	std::cout << "Choose action: (a)ttack, (p)otion, (s)kip. \n";*/
-
 	char choice;
 	Speclist list_to_attack = player_speclist;
 
@@ -187,10 +183,39 @@ void Player::showFullInfo()
 
 void Player::showInventory()
 {
+	std::cout << "===///===///=== Inventory ===///===///===\n";
 	int count = 1;
+
+	if (inventory.empty())
+	{
+		std::cout << "Your inventory is empty, poor man.\n";
+	}
+
 	for (auto it = inventory.begin(); it != inventory.end(); it++, count++)
 	{
 		std::cout << "Slot [" << count << "] :" << it->getName() << std::endl;
 	}
+}
+
+void Player::showEquipment()
+{
+	std::cout << "===***===***=== Equipment ===***===***===\n";
+	
+	if (equipment.empty())
+	{
+		std::cout << "You haven't equiped anything yet.\n";
+	}
+
+	for (auto it = equipment.begin(); it != equipment.end(); it++)
+	{
+		std::cout << it->first << ": " << it->second.getName() << std::endl;
+	}
+}
+
+void Player::openInventory()
+{
+	showInventory();
+	showEquipment();
+
 }
 
