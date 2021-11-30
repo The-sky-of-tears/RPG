@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chest.h" />
+    <ClInclude Include="Custom_Init.h" />
     <ClInclude Include="DB.h" />
     <ClInclude Include="DisplayMap.h" />
     <ClInclude Include="Enemy.h" />

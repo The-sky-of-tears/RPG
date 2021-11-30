@@ -1,5 +1,5 @@
 #pragma once
-#include "include/single_include/nlohmann/json.hpp"
+#include "Include/json.hpp"
 #include <fstream>
 #include <iostream>
 #include <iomanip>
@@ -17,11 +17,11 @@ public:
 
 public:
     DataBase() {
-        std::ifstream f(ITEMS_LOC);
-        f >> Items_DB;
-        f.close();
-        std::ifstream f(ENEMY_LOC);
-        f >> Enemy_DB;
+        std::ifstream item_file(ITEMS_LOC);
+        item_file >> Items_DB;
+        item_file.close();
+        std::ifstream enemy_file(ENEMY_LOC);
+        enemy_file >> Enemy_DB;
     }
 
     static DataBase& Instance()

@@ -1,6 +1,7 @@
 #pragma once
 #include "Manager.h"
 #include "DisplayMap.h"
+#include "Custom_Init.h"
 
 void Manager::startNewGame()
 {
@@ -12,8 +13,7 @@ void Manager::startNewGame()
 	std::cin >> new_name;
 
 	current_player = Player::getInstance(new_name);
-
-	current_map = new Map();
+	current_map = Custom_Init::for_Map();
 }
 
 void Manager::GameLoop()
@@ -22,6 +22,7 @@ void Manager::GameLoop()
 	int fight_result;
 	while (1)
 	{
+
 		DisplayMap::centerdedToCMD(3, current_map);
 		std::cout << "Where you want to go: (f)orward, (b)ackward, (l)eft, (r)igt? ";
 		std::cin >> choice;
@@ -39,13 +40,37 @@ void Manager::GameLoop()
 			if (current_map->checkTileForNPC(current_map->getPlayerPos()))
 			{
 				fight_result = startFight(current_map->getPlayerTileNPC());
-				if (fight_result == 0) {
+				if (fight_result == 1) {
 					Chest enemy_loot(current_map->getPlayerTileNPC()->inherit_item(), current_map->getPlayerTileNPC()->get_level()*5, current_map->getPlayerTileNPC()->get_level() * 10);
 					current_map->burryPlayerTileNPC(enemy_loot);
 				}
 				else
 				{
 					break;
+				}
+			}
+			if (current_map->checkTileForChest(current_map->getPlayerPos()))
+			{
+				std::cout << "Your tile has chest, do you want to open it? (y)es/ (n)o" << std::endl;
+				std::cin >> choice;
+				std::cout << std::endl;
+				if (std::cin.fail())
+				{
+					std::cin.clear();
+					std::cin.ignore(32767, '\n');
+					std::cout << "Oops, that input is invalid.  Please try again later.\n";
+				}
+				else
+				{
+					std::cin.ignore(32767, '\n');
+
+					switch (choice) {
+					case 'y':
+						openChest(current_map->getPlayerTileChest());
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}
@@ -126,18 +151,35 @@ void Manager::openChest(Chest* player_chest)
 		std::cout << "\t" << got_coins << "-- coins;" << std::endl;
 		std::cout << "\t" << got_exp << "-- experience;" << std::endl;
 	}
-	std::cout << "You opened same chest again, no coins for you!  " << std::endl;
+	else {
+		std::cout << "You opened same chest again, no coins for you!  " << std::endl;
+
+	}
+	
 	
 	int free_inv_place;
+
+	std::string choice;
 	int choice_int;
+	std::vector<Item> chest_items;
+
 	while (1) {
-		std::cout << "Choose which item put to an inventory:" << std::endl;
-		std::vector<Item> chest_items = player_chest->get_item_list();
-		for (int i = 0; i < chest_items.size(); i++) {
-			std::cout << i << "\t" << chest_items.at(i).getName() << ";" << std::endl;
+		if (player_chest->is_empty()) {
+			std::cout << "There is no items inside!" << std::endl;
+			std::cout << "Just write something to quit back to map" << std::endl;
+			std::cin >> choice;
+			std::cout << std::endl;
+			current_map->burryPlayerTileChest();
+			break;
+		}
+		else {
+			std::cout << "Choose which item put to an inventory:" << std::endl;
+			chest_items = player_chest->get_item_list();
+			for (int i = 0; i < chest_items.size(); i++) {
+				std::cout << i << "\t" << chest_items.at(i).getName() << ";" << std::endl;
+			}
 		}
 		std::cout << "Or write (q) to quit back to map" << std::endl;
-		std::string choice;
 		choice_int = -1;
 		std::cin >> choice;
 		std::cout << std::endl;
@@ -151,6 +193,9 @@ void Manager::openChest(Chest* player_chest)
 		{
 			std::cin.ignore(32767, '\n');
 			if (choice == "q") {
+				if (player_chest->is_empty()) {
+					current_map->burryPlayerTileChest();
+				}
 				break;
 			}
 			choice_int = stoi(choice);

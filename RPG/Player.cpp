@@ -38,7 +38,7 @@ const std::string& Player::getName()
 	return name;
 }
 
-const int& Player::getHealth()
+const double Player::getHealth()
 {
 	return player_speclist.get(Spec_Types::Health);
 }
@@ -182,3 +182,4 @@ void Player::showInventory()
 		std::cout << "Slot [" << count << "] :" << it->getName() << std::endl;
 	}
 }
+

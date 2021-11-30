@@ -60,7 +60,7 @@ public:
 
 	Speclist() {
 		for (int x = 0; x < static_cast<int>(Spec_Types::END); x++) {
-			specs[x] = 1; // был 0, исправил временно из за бага
+			specs[x] = 0;
 		}
 	}
 
@@ -71,6 +71,8 @@ public:
 	void calculate_secondary_stats() { // Apply that function to list with known S.P.E.C.I.A.L`s to fill other dependant stuff
 		specs[static_cast<int>(Spec_Types::Max_health)] = 20 + get(Spec_Types::Strength) + 2 * get(Spec_Types::Endurance);
 
+		specs[static_cast<int>(Spec_Types::Health)] = get(Spec_Types::Max_health);
+
 		specs[static_cast<int>(Spec_Types::Health_regen)] = get(Spec_Types::Endurance) / 2;
 		if (get(Spec_Types::Health_regen) < 1) specs[static_cast<int>(Spec_Types::Health_regen)] = 1;
 
@@ -79,9 +81,9 @@ public:
 		specs[static_cast<int>(Spec_Types::Crit_reject)] = get(Spec_Types::Agility) / 2;
 		if (get(Spec_Types::Crit_reject) < 1) specs[static_cast<int>(Spec_Types::Crit_reject)] = 1;
 
-		specs[static_cast<int>(Spec_Types::Damage_resist)] = 1; // был 0, исправил временно из за бага
+		specs[static_cast<int>(Spec_Types::Damage_resist)] = 1;
 
-		specs[static_cast<int>(Spec_Types::Meele_resist)] = 0;
+		specs[static_cast<int>(Spec_Types::Meele_resist)] = 1;
 
 		specs[static_cast<int>(Spec_Types::Deafening_resist)] = get(Spec_Types::Perception)*2;
 

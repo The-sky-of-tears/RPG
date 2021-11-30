@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "include/single_include/nlohmann/json.hpp"
+#include "Include/json.hpp"
 
 #include "DB.h"
 #include "Speclist.h"
@@ -77,7 +77,7 @@ public:
 	Item();
 	Item(int item_class, std::string item_name);
 	Item(Item_Search_Plate item_plate);
-	Item();
+
 	std::string getName();
 	std::string getDescription();
 

@@ -34,7 +34,7 @@ public:
 
 	const std::string& getName();
 
-	const int& getHealth();
+	const double getHealth();
 	const double& getMaxHealth();
 
 	double& setHealth();

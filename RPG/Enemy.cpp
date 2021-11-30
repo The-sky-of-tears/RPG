@@ -53,7 +53,7 @@ void npc::Enemy::defence(Speclist specsPlayer)
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Meele_resist) / 100) * specsPlayer.get(Spec_Types::Meele_damage));
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Deafening_resist) / 100) * specsPlayer.get(Spec_Types::Deafening_damage));
 	health_lost += static_cast<int>((specsEnemy.get(Spec_Types::Poision_resist) / 100) * specsPlayer.get(Spec_Types::Poision_damage));
-	health_lost /= static_cast<int>(specsEnemy.get(Spec_Types::Damage_resist));
+	health_lost /= static_cast<int>(specsEnemy.get(Spec_Types::Damage_resist)) + 1; // ¡Àﬂ“‹ ¡Àﬂ“‹ ¡Àﬂﬂﬂﬂﬂﬂ“‹, ƒ≤À≈ÕÕﬂ Õ¿ 0, “–≈¡¿ ¬—≈ Ã≤Õﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ“‹!!!!!!
 
 	specsEnemy.specs[static_cast<int>(Spec_Types::Health)] -= health_lost;
 }
