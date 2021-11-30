@@ -85,8 +85,7 @@ void Manager::continueGame()
 bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player loose, 1 - player win
 {
 	//test segment
-	int test = current_player->getHealth();
-	std::cout << "Fight: " << current_player->getName() << " (" << /*current_player->getHealth()*/test << " HP) VS "
+	std::cout << "Fight: " << current_player->getName() << " (" << current_player->getHealth() << " HP) VS "
 		<< current_enemy->getName() << " (" << current_enemy->getHealth() << " HP)\n";
 
 	bool player_turn = 1;
@@ -106,10 +105,10 @@ bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player l
 			if (!current_enemy->isAlive())
 			{
 				std::cout << "Enemy is dead\n"; // test, нужно открыть сундук, наверное
+				current_player->setHealth(current_player->getHealthRegen());
+				
 				return 1;
 			}
-
-			player_turn = !player_turn;
 		}
 		else
 		{
@@ -117,7 +116,6 @@ bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player l
 
 			current_player->defence(current_enemy->attack());
 
-			std::cout << current_player->getHealth() << std::endl;
 			std::cout << "Your health: " << current_player->getHealth() << " HP\n";
 
 			if (!current_player->isAlive())
@@ -125,10 +123,8 @@ bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player l
 				std::cout << "Noob, delete the game! ^_^ \n";
 				return 0;
 			}
-
-			player_turn = !player_turn;
-
 		}
+		player_turn = !player_turn;
 	}
 }
 

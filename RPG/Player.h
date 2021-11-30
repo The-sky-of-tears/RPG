@@ -35,9 +35,12 @@ public:
 	const std::string& getName();
 
 	const double getHealth();
+
 	const double& getMaxHealth();
 
-	double& setHealth();
+	const double getHealthRegen();
+
+	void setHealth(double incoming_regen);
 
 	bool isAlive();
 

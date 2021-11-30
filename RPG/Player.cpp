@@ -43,14 +43,23 @@ const double Player::getHealth()
 	return player_speclist.get(Spec_Types::Health);
 }
 
-/*int& Player::setHeal()
+const double Player::getHealthRegen()
 {
-	// TODO: insert return statement here
-}*/
+	return player_speclist.get(Spec_Types::Health_regen);
+}
 
-double& Player::setHealth()
+void Player::setHealth(double incoming_regen) //regen??
 {
-	return player_speclist.specs[static_cast<int>(Spec_Types::Health)];
+	if (player_speclist.get(Spec_Types::Health) + incoming_regen <
+		player_speclist.get(Spec_Types::Max_health))
+	{
+		player_speclist.specs[static_cast<int>(Spec_Types::Health)] += incoming_regen;
+	}
+	else
+	{
+		player_speclist.specs[static_cast<int>(Spec_Types::Health)] =
+			player_speclist.get(Spec_Types::Max_health);
+	}
 }
 
 const double& Player::getMaxHealth()
