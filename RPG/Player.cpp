@@ -118,10 +118,12 @@ Speclist Player::attack()
 					if (choice_weapon == '1')
 					{
 						list_to_attack = equipment["Weapon1"].useItem(player_speclist);
+						break;
 					}
 					else if (choice_weapon == '2')
 					{
 						list_to_attack = equipment["Weapon2"].useItem(player_speclist);
+						break;
 					}
 					else
 					{
