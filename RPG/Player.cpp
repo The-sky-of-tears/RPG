@@ -38,6 +38,11 @@ const std::string& Player::getName()
 	return name;
 }
 
+const int Player::getMoney()
+{
+	return player_speclist.get(Spec_Types::Coin);
+}
+
 const double Player::getHealth()
 {
 	return player_speclist.get(Spec_Types::Health);
@@ -141,10 +146,6 @@ Speclist Player::attack()
 				}
 			}
 		}
-		else if (choice == 'p')
-		{
-			
-		}
 		else if (choice == 's')
 		{
 			return list_to_attack;
@@ -155,8 +156,7 @@ Speclist Player::attack()
 			continue;
 		}
 
-		player_speclist.specs[static_cast<int>(Spec_Types::Action_points)]--;
-		
+		player_speclist.specs[static_cast<int>(Spec_Types::Action_points)]--;	
 	}
 	
 	std::cout << "You don't have any action points.\n";
@@ -165,6 +165,8 @@ Speclist Player::attack()
 
 void Player::defence(Speclist enemy_speclist)
 {
+	Speclist spec_to_defence = player_speclist;
+	
 
 	int health_lost = enemy_speclist.get(Spec_Types::Damage);
 	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Meele_resist) / 100) * enemy_speclist.get(Spec_Types::Meele_damage));

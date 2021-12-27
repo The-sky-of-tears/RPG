@@ -22,7 +22,6 @@ void Manager::GameLoop()
 	int fight_result;
 	while (1)
 	{
-
 		DisplayMap::centerdedToCMD(3, current_map);
 		std::cout << "Where you want to go: (f)orward, (b)ackward, (l)eft, (r)igt? Open (i)nventory. ";
 		std::cin >> choice;
@@ -100,7 +99,7 @@ bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player l
 		{
 			std::cout << "Your turn!\n";
 
-			std::cout << "Choose action: (a)ttack, (p)otion, (s)kip (default attack). \n";
+			std::cout << "Choose action: (a)ttack, (s)kip (default attack). \n";
 			
 			current_enemy->defence(current_player->attack());
 

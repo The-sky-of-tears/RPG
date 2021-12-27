@@ -33,6 +33,8 @@ public:
 
 	const std::string& getName();
 
+	const int getMoney();
+
 	const double getHealth();
 
 	const double& getMaxHealth();
