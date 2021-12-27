@@ -38,6 +38,11 @@ const std::string& Player::getName()
 	return name;
 }
 
+const int Player::getMoney()
+{
+	return player_speclist.get(Spec_Types::Coin);
+}
+
 const double Player::getHealth()
 {
 	return player_speclist.get(Spec_Types::Health);
@@ -98,49 +103,48 @@ Speclist Player::attack()
 		std::cin >> choice;
 	
 		if (choice == 'a')
-		{			
-			if (equipment.find("Weapon1") == equipment.end() &&
-				equipment.find("Weapon2") == equipment.end())
+		{	
+			std::cout << "Chose type of attack: \n";
+
+			if (equipment.find("Weapon") != equipment.end())
 			{
-				std::cout << "Seems to be u don't have any weapon. Use your fists.\n";
+				std::cout << "Weapon: " << equipment["Weapon"].getName() << ", DMG: " <<
+					equipment["Weapon"].getDescription() << std::endl;
+			}
+			else if (equipment.find("Magic Weapon") != equipment.end())
+			{
+				std::cout << "Magic Weapon: " << equipment["Magic Weapon"].getName() << ", DMG: " <<
+					equipment["Magic Weapon"].getDescription() << std::endl;
+			} 
+			else 
+			{
+				std::cout << "Seems to be u don't have any weapon. Use your fists (skip).\n";
 				continue;
 			}
-			else
-			{
-				std::cout << "Chose type of attack: \n";
-				std::cout << "Weapon1: " << equipment["Weapon1"].getName() << ", DMG: " <<
-					equipment["Weapon1"].getDescription() << std::endl;
 
-				std::cout << "Weapon2: " << equipment["Weapon2"].getName() << ", DMG: " <<
-					equipment["Weapon2"].getDescription() << std::endl;
-
-				std::cout << "Your choice Weapon(1), Weapon(2):\n";
-				char choice_weapon;
+			std::cout << "Your choice Weapon(1), Magic Weapon(2):\n";
+			char choice_weapon;
+			
+			while(1)
+			{	
 				std::cin >> choice_weapon;
-
-				while(1)
+					
+				if (choice_weapon == '1')
 				{
-					if (choice_weapon == '1')
-					{
-						list_to_attack = equipment["Weapon1"].useItem(player_speclist);
-						break;
-					}
-					else if (choice_weapon == '2')
-					{
-						list_to_attack = equipment["Weapon2"].useItem(player_speclist);
-						break;
-					}
-					else
-					{
-						std::cout << "Incorret input, try again. \n";
-						continue;
-					}
+					list_to_attack = equipment["Weapon"].useItem(player_speclist);
+					break;
+				}
+				else if (choice_weapon == '2')
+				{
+					list_to_attack = equipment["Magic Weapon"].useItem(player_speclist);
+					break;
+				}
+				else
+				{
+					std::cout << "Incorret input, try again. \n";
+					continue;
 				}
 			}
-		}
-		else if (choice == 'p')
-		{
-			
 		}
 		else if (choice == 's')
 		{
@@ -152,8 +156,7 @@ Speclist Player::attack()
 			continue;
 		}
 
-		player_speclist.specs[static_cast<int>(Spec_Types::Action_points)]--;
-		
+		player_speclist.specs[static_cast<int>(Spec_Types::Action_points)]--;	
 	}
 	
 	std::cout << "You don't have any action points.\n";
@@ -162,6 +165,8 @@ Speclist Player::attack()
 
 void Player::defence(Speclist enemy_speclist)
 {
+	Speclist spec_to_defence = player_speclist;
+	
 
 	int health_lost = enemy_speclist.get(Spec_Types::Damage);
 	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Meele_resist) / 100) * enemy_speclist.get(Spec_Types::Meele_damage));
@@ -172,8 +177,10 @@ void Player::defence(Speclist enemy_speclist)
 	player_speclist.specs[static_cast<int>(Spec_Types::Health)] -= health_lost;
 }
 
-void Player::showFullInfo()
+void Player::showCharacteristics()
 {
+	std::cout << "===///===///=== Characteristics ===///===///===\n";
+
 	std::cout << "Name: " << Player::getName() << std::endl;
 	for (int x = 0; x < static_cast<int>(Spec_Types::END); x++) 
 	{
@@ -193,13 +200,13 @@ void Player::showInventory()
 
 	for (auto it = inventory.begin(); it != inventory.end(); it++, count++)
 	{
-		std::cout << "Slot [" << count << "] :" << it->getName() << std::endl;
+		std::cout << "Slot [" << count << "]: " << it->getName() << std::endl;
 	}
 }
 
 void Player::showEquipment()
 {
-	std::cout << "===***===***=== Equipment ===***===***===\n";
+	std::cout << "===///===///=== Equipment ===///===///===\n";
 	
 	if (equipment.empty())
 	{
@@ -212,10 +219,104 @@ void Player::showEquipment()
 	}
 }
 
-void Player::openInventory()
+bool Player::equipItem(Item equip_item)
 {
+	std::string item_type;
+
+	switch (static_cast<int>(equip_item.getType()))
+	{
+	case 0:
+		item_type = "Armor";
+		break;
+	case 1:
+		item_type = "Hat";
+		break;
+	case 5:
+		item_type = "Weapon";
+		break;
+	case 6:
+		item_type = "Magic Weapon";
+		break;
+	default:
+		return 0;
+	}
+	
+	if (equipment.find(item_type) != equipment.end())
+	{
+		inventory.push_back(equipment.find(item_type)->second);
+
+		equipment.erase(item_type);
+
+		//need to sub parameters from player_spec
+		
+	}
+
+	if (item_type != "Weapon" && item_type != "Magic Weapon")
+	{
+		equip_item.useItem(player_speclist);
+	}
+
+	equipment.insert({ item_type, equip_item });
+
+	/*std::cout << static_cast<int>(equip_item.getType());*/
+	return 1;
+}
+
+void Player::openInventory()
+{	
 	showInventory();
-	showEquipment();
+	//showEquipment();
+
+	std::cout << "Choose item (number) you want to equip;show (i)nventory; show (e)quipment; show (c)haracteristics; (q) continue.\n";
+
+	char choice_inventory; 
+
+	while (1)
+	{
+		std::cin >> choice_inventory;
+
+		switch (choice_inventory)
+		{
+		case 'i':
+			showInventory();
+			break;
+		case 'e':
+			showEquipment();
+			break;
+		case 'c':
+			showCharacteristics();
+			break;
+		case 'q':
+			return;
+		default:
+			int ch_inv = choice_inventory - '0' - 1;
+
+			//std::cout << choice_inventory << " <- choice inventory\n" << ch_inv << " <- ch_inv\n";
+
+			if (ch_inv >= 0 && ch_inv < 10 && ch_inv < inventory.size())
+			{
+				if (equipItem(inventory[ch_inv]))
+				{
+					auto it = inventory.begin() + ch_inv;
+					inventory.erase(it);
+					std::cout << "Equiped correctly, now you can check your characteristics.\n";
+					break;
+				}
+				else
+				{
+					std::cout << "Somethint went wront (O_o). Try again.\n";
+					break;
+				}
+			}
+			else
+			{
+				std::cout << "Incorret input, try again. \n";
+				continue;
+			}
+		}	
+	}
+
+
 
 }
 
