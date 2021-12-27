@@ -139,8 +139,33 @@ void Manager::startTrade()
 
 void Manager::startHeal(npc::NotEnemy nurse)
 {
-	std::cout << "Hello. As you can see, I am a nurse. What are the nurses doing? Correct answer: heal." std::endl;
+	std::cout << "Hello. As you can see, I am a nurse. What are the nurses doing? Correct answer: heal." << std::endl;
 	std::cout << "Let's count now the number of coins that you need to give me." << std::endl;
+
+	if (current_player->getMoney() >= nurse.moneyForHeal())
+	{
+		char answer;
+		std::cout << "Do you want to heal? ((y)es or (n)o)" << std::endl;
+
+		while (1)
+		{
+			std::cin >> answer;
+			if ('y' == answer)
+			{
+				nurse.heal();
+				break;
+			}
+			else if ('n' == answer)
+			{
+				break;
+			}
+			std::cout << "Oops, something went wrong." << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << "You don't have enough money." << std::endl;
+	}
 }
 
 void Manager::openChest(Chest* player_chest)
