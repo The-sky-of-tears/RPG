@@ -17,17 +17,17 @@
 
 int main()
 {
-	srand(static_cast<unsigned int>(time(NULL)));
-	npc::Director director;
-	std::vector<std::shared_ptr<npc::Enemy>> enemyList;
-	npc::createEnemy(director, enemyList, { "A", 4 });
+	//srand(static_cast<unsigned int>(time(NULL)));
+	//npc::Director director;
+	//std::vector<std::shared_ptr<npc::Enemy>> enemyList;
+	//npc::createEnemy(director, enemyList, { "A", 4 });
 	
 	Manager test_manager;
 
 	test_manager.startNewGame();
 
 	test_manager.GameLoop();
-	//npc::NotEnemy();
+
 
 /*	int amount = 5;
 	std::vector<std::shared_ptr<npc::Enemy>> enemyList(amount);
