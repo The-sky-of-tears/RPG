@@ -106,15 +106,15 @@ Speclist Player::attack()
 		{	
 			std::cout << "Chose type of attack: \n";
 
-			if (equipment.find("Weapon") != equipment.end())
+			if (equipment.find("Weapon1") != equipment.end())
 			{
-				std::cout << "Weapon: " << equipment["Weapon"].getName() << ", DMG: " <<
-					equipment["Weapon"].getDescription() << std::endl;
+				std::cout << "Weapon1: " << equipment["Weapon1"].getName() << ", DMG: " <<
+					equipment["Weapon1"].getDescription() << std::endl;
 			}
-			else if (equipment.find("Magic Weapon") != equipment.end())
+			else if (equipment.find("Weapon2") != equipment.end())
 			{
-				std::cout << "Magic Weapon: " << equipment["Magic Weapon"].getName() << ", DMG: " <<
-					equipment["Magic Weapon"].getDescription() << std::endl;
+				std::cout << "Weapon2: " << equipment["Weapon2"].getName() << ", DMG: " <<
+					equipment["Weapon2"].getDescription() << std::endl;
 			} 
 			else 
 			{
@@ -122,7 +122,7 @@ Speclist Player::attack()
 				continue;
 			}
 
-			std::cout << "Your choice Weapon(1), Magic Weapon(2):\n";
+			std::cout << "Your choice Weapon(1), Weapon(2):\n";
 			char choice_weapon;
 			
 			while(1)
@@ -131,12 +131,12 @@ Speclist Player::attack()
 					
 				if (choice_weapon == '1')
 				{
-					list_to_attack = equipment["Weapon"].useItem(player_speclist);
+					list_to_attack = equipment["Weapon1"].useItem(player_speclist);
 					break;
 				}
 				else if (choice_weapon == '2')
 				{
-					list_to_attack = equipment["Magic Weapon"].useItem(player_speclist);
+					list_to_attack = equipment["Weapon2"].useItem(player_speclist);
 					break;
 				}
 				else
@@ -167,12 +167,14 @@ void Player::defence(Speclist enemy_speclist)
 {
 	Speclist spec_to_defence = player_speclist;
 	
+	equipment["Armor"].useItem(spec_to_defence);
+	equipment["Hat"].useItem(spec_to_defence);
 
 	int health_lost = enemy_speclist.get(Spec_Types::Damage);
-	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Meele_resist) / 100) * enemy_speclist.get(Spec_Types::Meele_damage));
-	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Deafening_resist) / 100) * enemy_speclist.get(Spec_Types::Deafening_damage));
-	health_lost += static_cast<int>((player_speclist.get(Spec_Types::Poision_resist) / 100) * enemy_speclist.get(Spec_Types::Poision_damage));
-	health_lost /= static_cast<int>(player_speclist.get(Spec_Types::Damage_resist));
+	health_lost += static_cast<int>((spec_to_defence.get(Spec_Types::Meele_resist) / 100) * enemy_speclist.get(Spec_Types::Meele_damage));
+	health_lost += static_cast<int>((spec_to_defence.get(Spec_Types::Deafening_resist) / 100) * enemy_speclist.get(Spec_Types::Deafening_damage));
+	health_lost += static_cast<int>((spec_to_defence.get(Spec_Types::Poision_resist) / 100) * enemy_speclist.get(Spec_Types::Poision_damage));
+	health_lost /= static_cast<int>(spec_to_defence.get(Spec_Types::Damage_resist));
 
 	player_speclist.specs[static_cast<int>(Spec_Types::Health)] -= health_lost;
 }
@@ -221,7 +223,7 @@ void Player::showEquipment()
 
 bool Player::equipItem(Item equip_item)
 {
-	std::string item_type;
+	std::string item_type = "Default";
 
 	switch (static_cast<int>(equip_item.getType()))
 	{
@@ -234,29 +236,59 @@ bool Player::equipItem(Item equip_item)
 	case 5:
 		item_type = "Weapon";
 		break;
-	case 6:
-		item_type = "Magic Weapon";
-		break;
 	default:
 		return 0;
 	}
 	
-	if (equipment.find(item_type) != equipment.end())
+	if (item_type == "Weapon")
+	{
+		if (equipment.find("Weapon1") == equipment.end())
+		{
+			item_type = "Weapon1";
+		}
+		else if (equipment.find("Weapon2") == equipment.end())
+		{
+			item_type = "Weapon2";
+		}
+		else
+		{
+			std::cout << "Which weapon you want to replace? Weapon(1), weapon(2)?\n";
+			char weapon_choice;
+
+			while (1)
+			{
+				std::cin >> weapon_choice;
+
+				if (weapon_choice == '1')
+				{
+					item_type = "Weapon1";
+					break;
+				}
+				else if (weapon_choice == '2')
+				{
+					item_type = "Weapon2";
+					break;
+				}
+				else
+				{
+					std::cout << "Something went wrong.\n";
+					continue;
+				}
+			}
+		}
+	}
+
+	if (item_type != "Default" && equipment.find(item_type) != equipment.end())
 	{
 		inventory.push_back(equipment.find(item_type)->second);
 
 		equipment.erase(item_type);
-
-		//need to sub parameters from player_spec
-		
 	}
 
-	if (item_type != "Weapon" && item_type != "Magic Weapon")
+	if (item_type != "Default")
 	{
-		equip_item.useItem(player_speclist);
+		equipment.insert({ item_type, equip_item });
 	}
-
-	equipment.insert({ item_type, equip_item });
 
 	/*std::cout << static_cast<int>(equip_item.getType());*/
 	return 1;
