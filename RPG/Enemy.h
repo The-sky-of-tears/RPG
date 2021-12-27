@@ -2,7 +2,7 @@
 #include "NPC.h"
 #include "Item.h"
 #include "Speclist.h"
-#include "include/single_include/nlohmann/json.hpp"
+#include "Include/json.hpp"
 #include <string>
 #include <memory>
 
@@ -50,7 +50,7 @@ namespace npc
 		void createNewEnemy();
 
 		virtual void nameTypeLevel() = 0;
-		virtual void specsOfEnemy(/*nlohmann::json* item_db*/) = 0;
+		virtual void specsOfEnemy() = 0;
 	};
 
 	class BuildWarrior : public EnemyBuilder
@@ -59,7 +59,7 @@ namespace npc
 		BuildWarrior();
 		~BuildWarrior();
 		void nameTypeLevel();
-		void specsOfEnemy(/*nlohmann::json* item_db*/);
+		void specsOfEnemy();
 	};
 
 	class BuildArcher : public EnemyBuilder
@@ -68,7 +68,7 @@ namespace npc
 		BuildArcher();
 		~BuildArcher();
 		void nameTypeLevel();
-		void specsOfEnemy(/*nlohmann::json* item_db*/);
+		void specsOfEnemy();
 	};
 
 	class BuildMagician : public EnemyBuilder
@@ -77,7 +77,7 @@ namespace npc
 		BuildMagician();
 		~BuildMagician();
 		void nameTypeLevel();
-		void specsOfEnemy(/*nlohmann::json* item_db*/);
+		void specsOfEnemy();
 	};
 
 	class Director

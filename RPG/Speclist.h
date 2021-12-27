@@ -67,4 +67,59 @@ public:
 	double get(Spec_Types spec) {
 		return specs[static_cast<int>(spec)];
 	}
+
+	void calculate_secondary_stats() { // Apply that function to list with known S.P.E.C.I.A.L`s to fill other dependant stuff
+		specs[static_cast<int>(Spec_Types::Max_health)] = 20 + get(Spec_Types::Strength) + 2 * get(Spec_Types::Endurance);
+
+		specs[static_cast<int>(Spec_Types::Health)] = get(Spec_Types::Max_health);
+
+		specs[static_cast<int>(Spec_Types::Health_regen)] = get(Spec_Types::Endurance) / 2;
+		if (get(Spec_Types::Health_regen) < 1) specs[static_cast<int>(Spec_Types::Health_regen)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Armor_class)] = get(Spec_Types::Agility);
+
+		specs[static_cast<int>(Spec_Types::Crit_reject)] = get(Spec_Types::Agility) / 2;
+		if (get(Spec_Types::Crit_reject) < 1) specs[static_cast<int>(Spec_Types::Crit_reject)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Damage_resist)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Meele_resist)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Deafening_resist)] = get(Spec_Types::Perception)*2;
+
+		specs[static_cast<int>(Spec_Types::Poision_resist)] = get(Spec_Types::Endurance) * 2;
+
+		specs[static_cast<int>(Spec_Types::Damage)] = get(Spec_Types::Strength) / 2;
+		if (get(Spec_Types::Damage) < 1) specs[static_cast<int>(Spec_Types::Damage)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Max_action_points)] = static_cast<int>((5 + get(Spec_Types::Agility)) / 2);
+		if (get(Spec_Types::Max_action_points) < 1) specs[static_cast<int>(Spec_Types::Max_action_points)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Action_points)] = get(Spec_Types::Max_action_points);
+
+		specs[static_cast<int>(Spec_Types::Action_points_regen)] = static_cast<int>((5 + get(Spec_Types::Agility)) / 2);
+		if (get(Spec_Types::Action_points_regen) < 1) specs[static_cast<int>(Spec_Types::Action_points_regen)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Meele_damage)] = get(Spec_Types::Agility) - 5 ;
+		if (get(Spec_Types::Meele_damage) < 1) specs[static_cast<int>(Spec_Types::Meele_damage)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Deafening_damage)] = get(Spec_Types::Strength) - 5;
+		if (get(Spec_Types::Deafening_damage) < 1) specs[static_cast<int>(Spec_Types::Deafening_damage)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Poision_damage)] = get(Spec_Types::Intelligence) - 5;
+		if (get(Spec_Types::Poision_damage) < 1) specs[static_cast<int>(Spec_Types::Poision_damage)] = 1;
+
+		specs[static_cast<int>(Spec_Types::Crit_chance)] = get(Spec_Types::Luck);
+
+		specs[static_cast<int>(Spec_Types::Crit_amplif)] = get(Spec_Types::Strength)/2;
+
+		specs[static_cast<int>(Spec_Types::Normal_speed)] = static_cast<int>(5);
+
+		specs[static_cast<int>(Spec_Types::Running_speed)] = static_cast<int>(7);
+		
+		specs[static_cast<int>(Spec_Types::Running_time)] = static_cast<int>(10);
+
+		specs[static_cast<int>(Spec_Types::Carry_weight)] = get(Spec_Types::Strength) + get(Spec_Types::Endurance) + 20;
+
+	}
 };

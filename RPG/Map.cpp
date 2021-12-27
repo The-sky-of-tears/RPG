@@ -20,14 +20,15 @@ Map::Map(std::pair<int, int> player_coords, std::vector<std::shared_ptr<npc::Ene
 	setDefaultTiles();
 	setPlayer(player_coords);
 
-	for (int i = 0; (i < enemies_coords.size() && i < enemies_to_set.size()); i++) {
+	for (int i = 0; i < enemies_coords.size(); i++) {
 		setNPC(enemies_to_set.at(i), enemies_coords.at(i));
 	}
-	
+
 	chests = chests_to_set;
-	for (int i = 0; (i < enemies_coords.size() && i < enemies_to_set.size()); i++) {
+	for (int i = 0; (i < chests_coords.size() && i < chests_to_set.size()); i++) {
 		setChest(&(chests.at(i)), chests_coords.at(i));
 	}
+
 }
 
 Map::~Map()
@@ -77,8 +78,6 @@ void Map::setPlayer(std::pair<int, int> new_player_tile)
 {
 
 	player_pos = Helpers::normalize_pair(new_player_tile, map_size);
-	std::cout << new_player_tile.first << " " << new_player_tile.second << std::endl;
-	std::cout << player_pos.first << " " << player_pos.second << std::endl;
 	map[player_pos.first][player_pos.second].setPlayer();
 }
 
@@ -139,7 +138,8 @@ Chest* Map::getPlayerTileChest()
 
 void Map::burryPlayerTileNPC(Chest dead_loot)
 {
-	
+	chests.insert(chests.end(), dead_loot);
+	setChest(&chests.at(chests.size() - 1), player_pos);
 	unsetNPC(player_pos);
 }
 

@@ -33,7 +33,6 @@ void Item::apply_spec_change(Speclist *Player_Specs, std::vector<ChangeList> app
 void Item::transform_item(Item_Search_Plate transform_plate)
 {
 	nlohmann::json found_item = DB.Items_DB[transform_plate.type][transform_plate.name];
-	std::cout << found_item << "\n\n";
 	name = transform_plate.name;
 	description = found_item["description"];
 	type = static_cast<Item_Types>(stoi(transform_plate.type));
@@ -81,6 +80,12 @@ Item::Item(int item_type, std::string item_name)
 Item::Item(Item_Search_Plate item_plate)
 {
 	transform_item(item_plate);
+}
+
+Item::Item()
+{
+	Item_Search_Plate new_plate("5", "Wooden stick"),
+	transform_item(new_plate);
 }
 
 std::string Item::getName()

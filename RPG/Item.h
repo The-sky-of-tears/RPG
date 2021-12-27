@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "include/single_include/nlohmann/json.hpp"
+#include "Include/json.hpp"
 
 #include "DB.h"
 #include "Speclist.h"
@@ -11,7 +11,7 @@
 
 
 enum class Item_Types {
-	Armor,
+	Armor, 
 	Hat,
 	Amplifier,
 	Potion,
@@ -72,11 +72,12 @@ private:
 	void apply_spec_change(Speclist *Player_Specs, std::vector<ChangeList> application, int mul);
 
 	void transform_item(Item_Search_Plate transform_plate);
-
-
+	
 public:
+	Item();
 	Item(int item_class, std::string item_name);
 	Item(Item_Search_Plate item_plate);
+
 	std::string getName();
 	std::string getDescription();
 

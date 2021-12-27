@@ -14,14 +14,17 @@ private:
 
 	std::string name;
 
-	int inv_capacity = 9;
-	std::vector<int> inventory;
+	int inv_max_capacity = 20;
+	int inv_curr_capacity  = 0;
+	std::vector<Item> inventory;
 	
-	//need class Spell ??
-	int spel_capacity = 4;
-	std::vector<std::string> availible_spels;
+	//add correct input check
+	std::unordered_map<std::string, Item> equipment;
+	/*std::unordered_map<std::string, Potion>*/
 
 	Player(std::string n);
+
+	friend class Chest;
 
 public:
 
@@ -31,17 +34,26 @@ public:
 
 	const std::string& getName();
 
-	const int& getHealthPoints();
+	const double getHealth();
+
 	const double& getMaxHealth();
 
-	double& setHealth();
+	const double getHealthRegen();
+
+	void setHealth(double incoming_regen);
 
 	bool isAlive();
 
 	Speclist attack();
 
-	bool defence(Speclist enemy_speclist); // 0 - player is dead, 1 - is alive
+	void defence(Speclist enemy_speclist); // 0 - player is dead, 1 - is alive
 
 	void showFullInfo();
+
+	void showInventory();
+
+	void showEquipment();
+
+	void openInventory();
 
 };

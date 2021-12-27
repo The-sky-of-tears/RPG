@@ -85,6 +85,18 @@ namespace DisplayMap
 				}
 			}
 			fout << "| \n";
+
+			for (y_coord = from.second; y_coord < to.second; y_coord++)
+			{
+				if (map_to_print->checkTileForChest({ x_coord, y_coord })) {
+					fout << "|   Chest     ";
+				}
+				else
+				{
+					fout << "|             ";
+				}
+			}
+			fout << "| \n";
 		}
 		for (y_coord = from.second; y_coord < to.second; y_coord++)
 		{
@@ -170,6 +182,19 @@ namespace DisplayMap
 				if(map_to_print->checkTileForNPC(Helpers::normalize_pair({ x_coord, y_coord }, map_to_print->getSize())))
 				{
 					std::cout << "|    NPC      ";
+				}
+				else
+				{
+					std::cout << "|             ";
+				}
+			}
+			std::cout << "| \n";
+
+			for (y_coord = from.second; y_coord < to.second; y_coord++)
+			{
+				if (map_to_print->checkTileForChest(Helpers::normalize_pair({ x_coord, y_coord }, map_to_print->getSize())))
+				{
+					std::cout << "|   Chest     ";
 				}
 				else
 				{

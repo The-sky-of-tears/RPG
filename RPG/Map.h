@@ -4,7 +4,6 @@
 #include <fstream>
 #include <vector>
 
-//#include "include/single_include/nlohmann/json.hpp"
 #include "Helpers.h"
 #include "Tile.h"
 
@@ -25,7 +24,7 @@ private:
 public:
 	Map();
 	Map(std::pair<int, int> player_coords, 
-		std::vector<std::shared_ptr<npc::Enemy>> enemies_to_set, std::vector < std::pair<int, int>> enemies_coords, 
+		std::vector<std::shared_ptr<npc::Enemy>> enemies_to_set, std::vector < std::pair<int, int> > enemies_coords, 
 		std::vector<Chest> chests_to_set, std::vector <std::pair<int, int>> chest_coords);
 	~Map();
 
