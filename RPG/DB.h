@@ -31,7 +31,6 @@ public:
     }
 
     DataBase() {
-        std::cout << "HERE" << std::endl;
         std::ifstream item_file(ITEMS_LOC);
         item_file >> Items_DB;
         item_file.close();

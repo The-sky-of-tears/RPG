@@ -46,7 +46,7 @@ void Manager::GameLoop()
 		{
 			std::cin.ignore(32767, '\n');
 			current_map->moovePlayer(choice);
-			if (current_map->checkTileForNPC(current_map->getPlayerPos()))
+			if (current_map->checkTileForEnemy(current_map->getPlayerPos()))
 			{
 				fight_result = startFight(current_map->getPlayerTileEnemy());
 				if (fight_result == 1) {
