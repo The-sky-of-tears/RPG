@@ -163,7 +163,7 @@ void npc::BuildMagician::specsOfEnemy()
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Health)] = 20;
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Max_health)] = 20;
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Health_regen)] = 0;
-	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Damage)] = 0;
+	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Damage)] = 1;
 	enemy->specsEnemy.specs[static_cast<int>(Spec_Types::Crit_chance)] = 25;
 
 	Item weapon( 5, "Magic Wand");

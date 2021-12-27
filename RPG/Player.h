@@ -18,7 +18,6 @@ private:
 	int inv_curr_capacity  = 0;
 	std::vector<Item> inventory;
 	
-	//add correct input check
 	std::unordered_map<std::string, Item> equipment;
 	/*std::unordered_map<std::string, Potion>*/
 
@@ -48,11 +47,13 @@ public:
 
 	void defence(Speclist enemy_speclist); // 0 - player is dead, 1 - is alive
 
-	void showFullInfo();
+	void showCharacteristics();
 
 	void showInventory();
 
 	void showEquipment();
+
+	bool equipItem(Item equip_item); //0 - not succesful, 1 - succesful
 
 	void openInventory();
 

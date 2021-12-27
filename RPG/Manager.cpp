@@ -24,7 +24,7 @@ void Manager::GameLoop()
 	{
 
 		DisplayMap::centerdedToCMD(3, current_map);
-		std::cout << "Where you want to go: (f)orward, (b)ackward, (l)eft, (r)igt? ";
+		std::cout << "Where you want to go: (f)orward, (b)ackward, (l)eft, (r)igt? Open (i)nventory. ";
 		std::cin >> choice;
 		std::cout << std::endl;
 		if (std::cin.fail())
@@ -33,7 +33,11 @@ void Manager::GameLoop()
 			std::cin.ignore(32767, '\n');
 			std::cout << "Oops, that input is invalid.  Please try again.\n";
 		}
-		else
+		else if (choice == 'i')
+		{
+			current_player->openInventory();
+			continue;
+		}
 		{
 			std::cin.ignore(32767, '\n');
 			current_map->moovePlayer(choice);
@@ -96,16 +100,17 @@ bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player l
 		{
 			std::cout << "Your turn!\n";
 
-			std::cout << "Choose action: (a)ttack, (p)otion, (s)kip. \n";
+			std::cout << "Choose action: (a)ttack, (p)otion, (s)kip (default attack). \n";
 			
 			current_enemy->defence(current_player->attack());
 
 			std::cout << "Enemy health: " << current_enemy->getHealth() << " HP\n";
 
+			current_player->setHealth(current_player->getHealthRegen());
+
 			if (!current_enemy->isAlive())
 			{
 				std::cout << "Enemy is dead\n"; // test, нужно открыть сундук, наверное
-				current_player->setHealth(current_player->getHealthRegen());
 				
 				return 1;
 			}
