@@ -104,22 +104,25 @@ Speclist Player::attack()
 	
 		if (choice == 'a')
 		{	
-			std::cout << "Chose type of attack: \n";
+			if (equipment.find("Weapon1") == equipment.end())
+			{
+				if (equipment.find("Weapon2") == equipment.end())
+				{
+					std::cout << "Seems to be u don't have any weapon. Use your fists (skip).\n";
+					continue;
+				}
+			}
 
 			if (equipment.find("Weapon1") != equipment.end())
 			{
 				std::cout << "Weapon1: " << equipment["Weapon1"].getName() << ", DMG: " <<
 					equipment["Weapon1"].getDescription() << std::endl;
 			}
-			else if (equipment.find("Weapon2") != equipment.end())
+
+			if (equipment.find("Weapon2") != equipment.end())
 			{
 				std::cout << "Weapon2: " << equipment["Weapon2"].getName() << ", DMG: " <<
 					equipment["Weapon2"].getDescription() << std::endl;
-			} 
-			else 
-			{
-				std::cout << "Seems to be u don't have any weapon. Use your fists (skip).\n";
-				continue;
 			}
 
 			std::cout << "Your choice Weapon(1), Weapon(2):\n";
