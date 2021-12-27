@@ -30,7 +30,7 @@ void npc::NotEnemy::heal(Player& player)
 //
 //}
 
-//void repair(Item& item)
+//void npc::NotEnemy::repair(Item& item)
 //{
 //
 //}
