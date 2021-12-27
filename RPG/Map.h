@@ -23,14 +23,19 @@ private:
 
 public:
 	Map();
+	Map(std::pair<int, int> player_coords, std::vector<std::shared_ptr<npc::Enemy>> enemies_to_set, std::vector<std::pair<int, int>> enemies_coords, std::vector<std::pair<int, int>> npc_coords, std::vector<npc::NotEnemy*> notEnemyList, std::vector<Chest> chests_to_set, std::vector<std::pair<int, int>> chests_coords);
 	Map(std::pair<int, int> player_coords, 
 		std::vector<std::shared_ptr<npc::Enemy>> enemies_to_set, std::vector < std::pair<int, int> > enemies_coords, 
+		std::vector <npc::NotEnemy*> npcs_to_set, std::vector<std::pair<int, int>> npc_coords,
 		std::vector<Chest> chests_to_set, std::vector <std::pair<int, int>> chest_coords);
 	~Map();
 
 	std::pair<int, int> getSize();
 
-	void setNPC(std::shared_ptr<npc::Enemy> NPC, std::pair<int, int> npc_coords);
+	void setEnemy(std::shared_ptr<npc::Enemy> NPC, std::pair<int, int> npc_coords);
+	void unsetEnemy(std::pair<int, int> npc_coords);
+
+	void setNPC(npc::NotEnemy* NPC, std::pair<int, int> npc_coords);
 	void unsetNPC(std::pair<int, int> npc_coords);
 
 	void setChest(Chest* chest_to_set, std::pair<int, int> chest_coords);
@@ -41,10 +46,11 @@ public:
 	void moovePlayer(char dir);
 
 	Tile_Types checkTileForType(std::pair<int, int> tile_to_check);
+	bool checkTileForEnemy(std::pair<int, int> tile_to_check);
 	bool checkTileForNPC(std::pair<int, int> tile_to_check);
 	bool checkTileForChest(std::pair<int, int> tile_to_check);
 
-	std::shared_ptr<npc::Enemy> getPlayerTileNPC();
+	std::shared_ptr<npc::Enemy> getPlayerTileEnemy();
 	Chest* getPlayerTileChest();
 
 	void burryPlayerTileNPC(Chest dead_loot);

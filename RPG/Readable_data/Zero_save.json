@@ -20,8 +20,27 @@
 			]
 		}
 	],
+
 	"Enemies":[
-		[7,7], [9,8], [1,1], [1,3]
+		{"pos": [7,7],
+		"type": "W",
+		"level": 1}, 
+		{"pos": [9,8],
+		"type": "W",
+		"level": 2},
+		{"pos": [1,1],
+		"type": "W",
+		"level": 3},
+		{"pos": [1,3],
+		"type": "W",
+		"level": 3} 
+	],
+
+	"Not_Enemies":[
+		{"pos": [7,9],
+		"type": "H"}, 
+		{"pos": [9,9],
+		"type": "H"}
 	],
 
 	"Player":{

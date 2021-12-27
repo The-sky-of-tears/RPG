@@ -5,12 +5,15 @@
 #include <iomanip>
 
 
-#include "Player.h"
+/*#include "Player.h"
 #include "Enemy.h"
 #include "NotEnemy.h"
-#include "Manager.h"
 #include "Item.h"
-#include "Chest.h"
+#include "Chest.h"*/
+#include "Manager.h"
+
+
+//#include "Custom_Init.h"
 
 int main()
 {
@@ -19,12 +22,12 @@ int main()
 	std::vector<std::shared_ptr<npc::Enemy>> enemyList;
 	npc::createEnemy(director, enemyList, { "A", 4 });
 	
-	/*Manager test_manager;
+	Manager test_manager;
 
 	test_manager.startNewGame();
 
-	test_manager.GameLoop();*/
-
+	test_manager.GameLoop();
+	//npc::NotEnemy();
 
 /*	int amount = 5;
 	std::vector<std::shared_ptr<npc::Enemy>> enemyList(amount);
@@ -47,9 +50,3 @@ int main()
 
 	return 0;
 }
-
-/*int main() {
-	Custom_Init::for_Map();
-
-	return 0;
-}*/

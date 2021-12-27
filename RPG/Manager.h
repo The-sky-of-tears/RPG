@@ -1,14 +1,7 @@
 #pragma once
 
-#include "Player.h"
-#include "Map.h"
-#include "Enemy.h"
-#include "NotEnemy.h"
-#include "NPC.h"
-
 //#include "Menu.h"
-
-
+#include "Map.h"
 class Manager
 {
 private:

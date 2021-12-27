@@ -1,6 +1,12 @@
 #pragma once
+#include "Player.h"
+
+#include "Enemy.h"
+#include "NotEnemy.h"
+#include "NPC.h"
 #include "Manager.h"
 #include "DisplayMap.h"
+
 #include "Custom_Init.h"
 
 void Manager::startNewGame()
@@ -42,9 +48,9 @@ void Manager::GameLoop()
 			current_map->moovePlayer(choice);
 			if (current_map->checkTileForNPC(current_map->getPlayerPos()))
 			{
-				fight_result = startFight(current_map->getPlayerTileNPC());
+				fight_result = startFight(current_map->getPlayerTileEnemy());
 				if (fight_result == 1) {
-					Chest enemy_loot(current_map->getPlayerTileNPC()->inherit_item(), current_map->getPlayerTileNPC()->get_level()*5, current_map->getPlayerTileNPC()->get_level() * 10);
+					Chest enemy_loot(current_map->getPlayerTileEnemy()->inherit_item(), current_map->getPlayerTileEnemy()->get_level()*5, current_map->getPlayerTileEnemy()->get_level() * 10);
 					current_map->burryPlayerTileNPC(enemy_loot);
 				}
 				else

@@ -4,6 +4,7 @@
 #include "Chest.h"
 #include "Enemy.h"
 #include "NPC.h"
+#include "NotEnemy.h"
 
 enum class Tile_Types {
 	Ground,
@@ -19,9 +20,10 @@ private:
 
 	bool is_player_here;
 	
-	bool is_npc_here;
-	std::shared_ptr<npc::Enemy> npc;
-
+	bool is_enemy_here;
+	std::shared_ptr<npc::Enemy> Enemy;
+	bool is_not_enemy_here;
+	npc::NotEnemy* NPC;
 	bool is_chest_here;
 	Chest* chest;
 
@@ -33,18 +35,23 @@ public:
 	void setPlayer();
 	void unsetPlayer();
 
-	void setNPC(std::shared_ptr<npc::Enemy> npc_to_set);
-	std::shared_ptr<npc::Enemy> unsetNPC();
+	void setEnemy(std::shared_ptr<npc::Enemy> enemy_to_set);
+	std::shared_ptr<npc::Enemy> unsetEnemy();
+
+	void setNPC(npc::NotEnemy* npc_to_set);
+	npc::NotEnemy* unsetNPC();
 
 	void setChest(Chest* chest_to_set);
 	Chest* unsetChest();
 
 	Tile_Types getType();
 	bool checkForPlayer();
+	bool checkForEnemy();
 	bool checkForNPC();
 	bool checkForChest();
 
-	std::shared_ptr<npc::Enemy> returnNPC();
+	std::shared_ptr<npc::Enemy> returnEnemy();
+	npc::NotEnemy* returnNPC();
 	Chest* returnChest();
 
 };

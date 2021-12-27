@@ -11,7 +11,10 @@ Map::Map()
 	setPlayer({ map_size.first / 2, map_size.second / 2 });
 }
 
-Map::Map(std::pair<int, int> player_coords, std::vector<std::shared_ptr<npc::Enemy>> enemies_to_set, std::vector<std::pair<int, int>> enemies_coords, std::vector<Chest> chests_to_set, std::vector<std::pair<int, int>> chests_coords)
+Map::Map(std::pair<int, int> player_coords, 
+	std::vector<std::shared_ptr<npc::Enemy>> enemies_to_set, std::vector<std::pair<int, int>> enemies_coords, 
+	std::vector <npc::NotEnemy*> npcs_to_set, std::vector<std::pair<int, int>> npc_coords,
+	std::vector<Chest> chests_to_set, std::vector<std::pair<int, int>> chests_coords)
 {
 	map_size = std::make_pair(10, 10);
 	map = new Tile * [map_size.first];
@@ -21,7 +24,11 @@ Map::Map(std::pair<int, int> player_coords, std::vector<std::shared_ptr<npc::Ene
 	setPlayer(player_coords);
 
 	for (int i = 0; i < enemies_coords.size(); i++) {
-		setNPC(enemies_to_set.at(i), enemies_coords.at(i));
+		setEnemy(enemies_to_set.at(i), enemies_coords.at(i));
+	}
+
+	for (int i = 0; i < npc_coords.size(); i++) {
+		setNPC(npcs_to_set.at(i), npc_coords.at(i));
 	}
 
 	chests = chests_to_set;
@@ -42,7 +49,17 @@ std::pair<int, int> Map::getSize()
 	return map_size;
 }
 
-void Map::setNPC(std::shared_ptr<npc::Enemy> NPC, std::pair<int, int> npc_coords)
+void Map::setEnemy(std::shared_ptr<npc::Enemy> NPC, std::pair<int, int> npc_coords)
+{
+	map[npc_coords.first][npc_coords.second].setEnemy(NPC);
+}
+
+void Map::unsetEnemy(std::pair<int, int> npc_coords)
+{
+	map[npc_coords.first][npc_coords.second].unsetEnemy();
+}
+
+void Map::setNPC(npc::NotEnemy* NPC, std::pair<int, int> npc_coords)
 {
 	map[npc_coords.first][npc_coords.second].setNPC(NPC);
 }
@@ -116,6 +133,11 @@ Tile_Types Map::checkTileForType(std::pair<int, int> tile_to_check)
 	return map[tile_to_check.first][tile_to_check.second].getType();
 }
 
+bool Map::checkTileForEnemy(std::pair<int, int> tile_to_check)
+{
+	return map[tile_to_check.first][tile_to_check.second].checkForEnemy();
+}
+
 bool Map::checkTileForNPC(std::pair<int, int> tile_to_check)
 {
 	return map[tile_to_check.first][tile_to_check.second].checkForNPC();
@@ -126,9 +148,9 @@ bool Map::checkTileForChest(std::pair<int, int> tile_to_check)
 	return map[tile_to_check.first][tile_to_check.second].checkForChest();
 }
 
-std::shared_ptr<npc::Enemy> Map::getPlayerTileNPC()
+std::shared_ptr<npc::Enemy> Map::getPlayerTileEnemy()
 {
-	return map[player_pos.first][player_pos.second].returnNPC();
+	return map[player_pos.first][player_pos.second].returnEnemy();
 }
 
 Chest* Map::getPlayerTileChest()
@@ -140,7 +162,7 @@ void Map::burryPlayerTileNPC(Chest dead_loot)
 {
 	chests.insert(chests.end(), dead_loot);
 	setChest(&chests.at(chests.size() - 1), player_pos);
-	unsetNPC(player_pos);
+	unsetEnemy(player_pos);
 }
 
 void Map::burryPlayerTileChest()
