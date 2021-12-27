@@ -86,12 +86,12 @@ npc::BuildWarrior::BuildWarrior() : EnemyBuilder() {}
 
 npc::BuildWarrior::~BuildWarrior() {}
 
-void npc::BuildWarrior::nameTypeLevel()
+void npc::BuildWarrior::nameTypeLevel(int lvlOfEnemy)
 {
 	InfNPC obj;
 	enemy->setName(obj.m_arrOfNames[rand() % 5]);
 	enemy->setType(obj.m_arrOfTypesEnemy[0]);
-	enemy->setLvl(1);
+	enemy->setLvl(lvlOfEnemy);
 }
 void npc::BuildWarrior::specsOfEnemy()
 {
@@ -117,12 +117,12 @@ npc::BuildArcher::BuildArcher() : EnemyBuilder() {}
 
 npc::BuildArcher::~BuildArcher() {}
 
-void npc::BuildArcher::nameTypeLevel()
+void npc::BuildArcher::nameTypeLevel(int lvlOfEnemy)
 {
 	InfNPC obj;
 	enemy->setName(obj.m_arrOfNames[rand() % 5]);
 	enemy->setType(obj.m_arrOfTypesEnemy[1]);
-	enemy->setLvl(0);
+	enemy->setLvl(lvlOfEnemy);
 }
 void npc::BuildArcher::specsOfEnemy()
 {
@@ -148,12 +148,12 @@ npc::BuildMagician::BuildMagician() : EnemyBuilder() {}
 
 npc::BuildMagician::~BuildMagician() {}
 
-void npc::BuildMagician::nameTypeLevel()
+void npc::BuildMagician::nameTypeLevel(int lvlOfEnemy)
 {
 	InfNPC obj;
 	enemy->setName(obj.m_arrOfNames[rand() % 5]);
 	enemy->setType(obj.m_arrOfTypesEnemy[2]);
-	enemy->setLvl(0);
+	enemy->setLvl(lvlOfEnemy);
 }
 void npc::BuildMagician::specsOfEnemy()
 {
@@ -183,10 +183,10 @@ void npc::Director::setBuilder(EnemyBuilder* b)
 	builder = b;
 }
 
-void npc::Director::build()
+void npc::Director::build(int lvlOfEnemy)
 {
 	builder->createNewEnemy();
-	builder->nameTypeLevel();
+	builder->nameTypeLevel(lvlOfEnemy);
 	builder->specsOfEnemy();
 }
 
@@ -195,32 +195,29 @@ std::shared_ptr<npc::Enemy> npc::Director::getEnemy()
 	return builder->getEnemy();
 }
 
-void/*std::shared_ptr<npc::Enemy>*/ npc::createEnemy(Director& director, int amount, std::vector<std::shared_ptr<Enemy>>& enemyList)
+void npc::createEnemy(Director& director,
+	std::vector<std::shared_ptr<Enemy>>& enemyList,
+	std::pair<std::string, int> typeLvlOfEnemy)
 {
-	//std::shared_ptr<Enemy> enemy;
-	for (int i = 0; i < amount; i++)
-	{
-		int typeOfEnemy = rand() % 3;
-		if (typeOfEnemy == 0)
+		if (typeLvlOfEnemy.first == "W")
 		{
 			BuildWarrior warriorBuilder;
 			director.setBuilder(&warriorBuilder);
-			director.build();
-			enemyList.at(i) = director.getEnemy();
+			director.build(typeLvlOfEnemy.second);
+			enemyList.push_back(director.getEnemy());
 		}
-		else if (typeOfEnemy == 1)
+		else if (typeLvlOfEnemy.first == "A")
 		{
 			BuildArcher archerBuilder;
 			director.setBuilder(&archerBuilder);
-			director.build();
-			enemyList.at(i) = director.getEnemy();
+			director.build(typeLvlOfEnemy.second);
+			enemyList.push_back(director.getEnemy());
 		}
-		else if (typeOfEnemy)
+		else if (typeLvlOfEnemy.first == "M")
 		{
 			BuildMagician magicianBuilder;
 			director.setBuilder(&magicianBuilder);
-			director.build();
-			enemyList.at(i) = director.getEnemy();
+			director.build(typeLvlOfEnemy.second);
+			enemyList.push_back(director.getEnemy());
 		}
-	}
 }

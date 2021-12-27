@@ -26,7 +26,7 @@ namespace Custom_Init {
         }
         std::vector<std::shared_ptr<npc::Enemy>> enemyList(enemy_coords.size());
         npc::Director director;
-        npc::createEnemy(director, enemy_coords.size(), enemyList);
+        /*npc::createEnemy(director, enemy_coords.size(), enemyList);*/
 
         /*      Player      */
         current_branch = DB.Enemy_DB["Player"];

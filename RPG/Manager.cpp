@@ -133,9 +133,10 @@ void Manager::startTrade()
 
 }
 
-void Manager::startHeal()
+void Manager::startHeal(npc::NotEnemy nurse)
 {
-
+	std::cout << "Hello. As you can see, I am a nurse. What are the nurses doing? Correct answer: heal." std::endl;
+	std::cout << "Let's count now the number of coins that you need to give me." << std::endl;
 }
 
 void Manager::openChest(Chest* player_chest)

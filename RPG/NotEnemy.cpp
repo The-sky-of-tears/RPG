@@ -20,17 +20,14 @@ const std::string& npc::NotEnemy::getType()
 	return m_type;
 }
 
-void npc::NotEnemy::heal(Player& player)
+int npc::NotEnemy::moneyForHeal()
 {
-	player.setHealth(player.getMaxHealth());
+	Player* player = Player::getInstance();
+	return (player->getMaxHealth() - player->getHealth());
 }
 
-//bool npc::NotEnemy::trade()
-//{
-//
-//}
-
-//void npc::NotEnemy::repair(Item& item)
-//{
-//
-//}
+void npc::NotEnemy::heal()
+{
+	Player* player = Player::getInstance();
+	player->setHealth(player->getMaxHealth());
+}

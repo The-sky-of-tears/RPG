@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "Enemy.h"
+#include "NotEnemy.h"
 #include "NPC.h"
 
 //#include "Menu.h"
@@ -27,7 +28,7 @@ public:
 
 	void startTrade();
 
-	void startHeal();
+	void startHeal(npc::NotEnemy nurse);
 
 	void openChest(Chest* player_chest);
 

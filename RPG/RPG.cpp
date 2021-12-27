@@ -7,6 +7,7 @@
 
 #include "Player.h"
 #include "Enemy.h"
+#include "NotEnemy.h"
 #include "Manager.h"
 #include "Item.h"
 #include "Chest.h"
@@ -14,11 +15,16 @@
 int main()
 {
 	srand(static_cast<unsigned int>(time(NULL)));
-	Manager test_manager;
+	npc::Director director;
+	std::vector<std::shared_ptr<npc::Enemy>> enemyList;
+	npc::createEnemy(director, enemyList, { "A", 4 });
+	
+	/*Manager test_manager;
 
 	test_manager.startNewGame();
 
-	test_manager.GameLoop();
+	test_manager.GameLoop();*/
+
 
 /*	int amount = 5;
 	std::vector<std::shared_ptr<npc::Enemy>> enemyList(amount);

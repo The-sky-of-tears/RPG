@@ -49,7 +49,7 @@ namespace npc
 		std::shared_ptr<Enemy> getEnemy();
 		void createNewEnemy();
 
-		virtual void nameTypeLevel() = 0;
+		virtual void nameTypeLevel(int lvlOfEnemy) = 0;
 		virtual void specsOfEnemy() = 0;
 	};
 
@@ -58,7 +58,7 @@ namespace npc
 	public:
 		BuildWarrior();
 		~BuildWarrior();
-		void nameTypeLevel();
+		void nameTypeLevel(int lvlOfEnemy);
 		void specsOfEnemy();
 	};
 
@@ -67,7 +67,7 @@ namespace npc
 	public:
 		BuildArcher();
 		~BuildArcher();
-		void nameTypeLevel();
+		void nameTypeLevel(int lvlOfEnemy);
 		void specsOfEnemy();
 	};
 
@@ -76,7 +76,7 @@ namespace npc
 	public:
 		BuildMagician();
 		~BuildMagician();
-		void nameTypeLevel();
+		void nameTypeLevel(int lvlOfEnemy);
 		void specsOfEnemy();
 	};
 
@@ -90,8 +90,8 @@ namespace npc
 
 		void setBuilder(EnemyBuilder* b);
 		std::shared_ptr<Enemy> getEnemy();
-		void build();
+		void build(int lvlOfEnemy);
 	};
 
-	void/*std::shared_ptr<npc::Enemy>*/ createEnemy(Director& director, int amount, std::vector<std::shared_ptr<Enemy>>& enemyList);
+	void createEnemy(Director& director, std::vector<std::shared_ptr<Enemy>>& enemyList, std::pair<std::string, int> typeOfEnemy);
 }

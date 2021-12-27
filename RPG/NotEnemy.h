@@ -15,10 +15,7 @@ namespace npc
 		~NotEnemy();
 		const std::string& getName();
 		const std::string& getType();
-		void heal(Player& player);
-		/*bool trade();*/
-		//void repair(Item& item);
+		int moneyForHeal();
+		void heal();
 	};
 }
-
-
