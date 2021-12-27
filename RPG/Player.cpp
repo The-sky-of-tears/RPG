@@ -174,9 +174,9 @@ void Player::defence(Speclist enemy_speclist)
 	equipment["Hat"].useItem(spec_to_defence);
 
 	int health_lost = enemy_speclist.get(Spec_Types::Damage);
-	health_lost += static_cast<int>((spec_to_defence.get(Spec_Types::Meele_resist) / 100) * enemy_speclist.get(Spec_Types::Meele_damage));
-	health_lost += static_cast<int>((spec_to_defence.get(Spec_Types::Deafening_resist) / 100) * enemy_speclist.get(Spec_Types::Deafening_damage));
-	health_lost += static_cast<int>((spec_to_defence.get(Spec_Types::Poision_resist) / 100) * enemy_speclist.get(Spec_Types::Poision_damage));
+	health_lost += static_cast<int>( (1 - (spec_to_defence.get(Spec_Types::Meele_resist) / 100)) * enemy_speclist.get(Spec_Types::Meele_damage));
+	health_lost += static_cast<int>( (1-(spec_to_defence.get(Spec_Types::Deafening_resist) / 100)) * enemy_speclist.get(Spec_Types::Deafening_damage));
+	health_lost += static_cast<int>( (1-(spec_to_defence.get(Spec_Types::Poision_resist) / 100)) * enemy_speclist.get(Spec_Types::Poision_damage));
 	health_lost /= static_cast<int>(spec_to_defence.get(Spec_Types::Damage_resist));
 
 	player_speclist.specs[static_cast<int>(Spec_Types::Health)] -= health_lost;
