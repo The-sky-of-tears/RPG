@@ -197,7 +197,10 @@ void Player::showCharacteristics()
 	Speclist info_spec = player_speclist;
 	for (auto it = equipment.begin(); it != equipment.end(); it++)
 	{
-		it->second.useItem(info_spec);
+		if (it->first != "Weapon2")
+		{
+			info_spec = it->second.useItem(info_spec);
+		}
 	}
 
 	std::cout << "Coin: " << info_spec.specs[0] << std::endl;
