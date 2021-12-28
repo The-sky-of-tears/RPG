@@ -40,7 +40,7 @@ namespace Custom_Init {
            // new_enemy = new npc::NotEnemy;
             notEnemy_list.push_back(new_enemy);
         }
-        delete new_enemy;
+        //delete new_enemy;
         /*      Player      */
         current_branch = DB.Current_save["Player"];
         std::pair<int, int> player_coords = std::make_pair(current_branch["pos"][0], current_branch["pos"][1]);
