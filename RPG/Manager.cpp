@@ -100,7 +100,7 @@ bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player l
 {
 	//test segment
 	std::cout << "Fight: " << current_player->getName() << " (" << current_player->getHealth() << " HP) VS "
-		<< current_enemy->getName() << " (" << current_enemy->getHealth() << " HP)\n";
+		<< current_enemy->getType() << " " << current_enemy->getName() << " (" << current_enemy->getHealth() << " HP)\n";
 
 	bool player_turn = 1;
 
