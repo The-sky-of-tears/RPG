@@ -58,6 +58,11 @@ void Manager::GameLoop()
 					break;
 				}
 			}
+			if (current_map->checkTileForNPC(current_map->getPlayerPos()))
+			{
+				//npc::NotEnemy nurse;
+				startHeal(*current_map->getPlayerTileNPC());
+			}
 			if (current_map->checkTileForChest(current_map->getPlayerPos()))
 			{
 				std::cout << "Your tile has chest, do you want to open it? (y)es/ (n)o" << std::endl;
@@ -138,11 +143,6 @@ bool Manager::startFight(std::shared_ptr<npc::Enemy> current_enemy) //0 player l
 	}
 }
 
-void Manager::startTrade()
-{
-
-}
-
 void Manager::startHeal(npc::NotEnemy nurse)
 {
 	std::cout << "Hello. As you can see, I am a nurse. What are the nurses doing? Correct answer: heal." << std::endl;
@@ -150,8 +150,10 @@ void Manager::startHeal(npc::NotEnemy nurse)
 
 	if (current_player->getMoney() >= nurse.moneyForHeal())
 	{
-		char answer;
+		std::cout << "Price is: " << nurse.moneyForHeal() << std::endl;
 		std::cout << "Do you want to heal? ((y)es or (n)o)" << std::endl;
+
+		char answer;
 
 		while (1)
 		{

@@ -19,8 +19,6 @@ public:
 
 	bool startFight(std::shared_ptr<npc::Enemy> current_enemy); //0 player loose, 1 - player win
 
-	void startTrade();
-
 	void startHeal(npc::NotEnemy nurse);
 
 	void openChest(Chest* player_chest);

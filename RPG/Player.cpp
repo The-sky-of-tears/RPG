@@ -170,8 +170,14 @@ void Player::defence(Speclist enemy_speclist)
 {
 	Speclist spec_to_defence = player_speclist;
 	
-	equipment["Armor"].useItem(spec_to_defence);
-	equipment["Hat"].useItem(spec_to_defence);
+	if (equipment.find("Armor") != equipment.end())
+	{
+		equipment["Armor"].useItem(spec_to_defence);
+	}
+	if (equipment.find("Hat") != equipment.end())
+	{
+		equipment["Hat"].useItem(spec_to_defence);
+	}
 
 	int health_lost = enemy_speclist.get(Spec_Types::Damage);
 	health_lost += static_cast<int>( (1 - (spec_to_defence.get(Spec_Types::Meele_resist) / 100)) * enemy_speclist.get(Spec_Types::Meele_damage));
@@ -187,10 +193,45 @@ void Player::showCharacteristics()
 	std::cout << "===///===///=== Characteristics ===///===///===\n";
 
 	std::cout << "Name: " << Player::getName() << std::endl;
-	for (int x = 0; x < static_cast<int>(Spec_Types::END); x++) 
+
+	Speclist info_spec = player_speclist;
+	for (auto it = equipment.begin(); it != equipment.end(); it++)
+	{
+		it->second.useItem(info_spec);
+	}
+
+	std::cout << "Coin: " << info_spec.specs[0] << std::endl;
+	std::cout << "Experience: " << info_spec.specs[1] << std::endl;
+	std::cout << "Strength: " << info_spec.specs[2] << std::endl;
+	std::cout << "Perception: " << info_spec.specs[3] << std::endl;
+	std::cout << "Endurance: " << info_spec.specs[4] << std::endl;
+	std::cout << "Charisma: " << info_spec.specs[5] << std::endl;
+	std::cout << "Intelligence: " << info_spec.specs[6] << std::endl;
+	std::cout << "Agility: " << info_spec.specs[7] << std::endl;
+	std::cout << "Luck: " << info_spec.specs[8] << std::endl;
+	std::cout << "Max_health: " << info_spec.specs[9] << std::endl;
+	std::cout << "Health: " << info_spec.specs[10] << std::endl;
+	std::cout << "Health_regen: " << info_spec.specs[11] << std::endl;
+	std::cout << "Armor_class: " << info_spec.specs[12] << std::endl;
+	std::cout << "Crit_reject: " << info_spec.specs[13] << std::endl;
+	std::cout << "Damage_resist: " << info_spec.specs[14] << std::endl;
+	std::cout << "Meele_resist: " << info_spec.specs[15] << std::endl;
+	std::cout << "Deafening_resist: " << info_spec.specs[16] << std::endl;
+	std::cout << "Poision_resist: " << info_spec.specs[17] << std::endl;
+	std::cout << "Damage: " << info_spec.specs[18] << std::endl;
+	std::cout << "Action_points: " << info_spec.specs[19] << std::endl;
+	std::cout << "Max_action_points: " << info_spec.specs[20] << std::endl;
+	std::cout << "Action_points_regen: " << info_spec.specs[21] << std::endl;
+	std::cout << "Meele_damage: " << info_spec.specs[22] << std::endl;
+	std::cout << "Deafening_damage: " << info_spec.specs[23] << std::endl;
+	std::cout << "Poision_damage: " << info_spec.specs[24] << std::endl;
+	std::cout << "Crit_chance: " << info_spec.specs[25] << std::endl;
+	std::cout << "Crit_amplif: " << info_spec.specs[26] << std::endl;
+	std::cout << "Carry_weight: " << info_spec.specs[30] << std::endl;
+	/*for (int x = 0; x < static_cast<int>(Spec_Types::END); x++) 
 	{
 		std::cout << player_speclist.specs[x] << std::endl;
-	}
+	}*/
 }
 
 void Player::showInventory()
@@ -354,4 +395,3 @@ void Player::openInventory()
 
 
 }
-

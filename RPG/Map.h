@@ -52,6 +52,7 @@ public:
 
 	std::shared_ptr<npc::Enemy> getPlayerTileEnemy();
 	Chest* getPlayerTileChest();
+	npc::NotEnemy* getPlayerTileNPC();
 
 	void burryPlayerTileNPC(Chest dead_loot);
 	void burryPlayerTileChest();

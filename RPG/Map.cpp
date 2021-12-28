@@ -158,6 +158,11 @@ Chest* Map::getPlayerTileChest()
 	return map[player_pos.first][player_pos.second].returnChest();
 }
 
+npc::NotEnemy* Map::getPlayerTileNPC()
+{
+	return map[player_pos.first][player_pos.second].returnNPC();
+}
+
 void Map::burryPlayerTileNPC(Chest dead_loot)
 {
 	chests.insert(chests.end(), dead_loot);
